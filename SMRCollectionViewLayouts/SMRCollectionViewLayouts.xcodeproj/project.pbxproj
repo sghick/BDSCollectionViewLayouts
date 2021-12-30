@@ -17,6 +17,12 @@
 		1DC58AF4277D99C0002A796C /* SMRCVLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58AF3277D99C0002A796C /* SMRCVLineLayout.m */; };
 		1DC58AF7277D99FF002A796C /* SMRCVLineLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58AF6277D99FF002A796C /* SMRCVLineLayoutController.m */; };
 		1DC58AFA277D9A50002A796C /* SMRCVLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58AF9277D9A50002A796C /* SMRCVLayoutController.m */; };
+		1DC58AFD277D9D3E002A796C /* SMRCVCircleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58AFC277D9D3E002A796C /* SMRCVCircleLayout.m */; };
+		1DC58B00277D9D52002A796C /* SMRCVCircleLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58AFF277D9D52002A796C /* SMRCVCircleLayoutController.m */; };
+		1DC58B06277DA452002A796C /* SMRCVSquareLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B05277DA452002A796C /* SMRCVSquareLayoutController.m */; };
+		1DC58B09277DA4A0002A796C /* SMRCVSquareLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B08277DA4A0002A796C /* SMRCVSquareLayout.m */; };
+		1DC58B0C277DA75B002A796C /* SMRCVWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B0B277DA75B002A796C /* SMRCVWaterfallLayout.m */; };
+		1DC58B0F277DA77B002A796C /* SMRCVWaterfallLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B0E277DA77B002A796C /* SMRCVWaterfallLayoutController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +44,18 @@
 		1DC58AF6277D99FF002A796C /* SMRCVLineLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVLineLayoutController.m; sourceTree = "<group>"; };
 		1DC58AF8277D9A50002A796C /* SMRCVLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVLayoutController.h; sourceTree = "<group>"; };
 		1DC58AF9277D9A50002A796C /* SMRCVLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVLayoutController.m; sourceTree = "<group>"; };
+		1DC58AFB277D9D3E002A796C /* SMRCVCircleLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVCircleLayout.h; sourceTree = "<group>"; };
+		1DC58AFC277D9D3E002A796C /* SMRCVCircleLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVCircleLayout.m; sourceTree = "<group>"; };
+		1DC58AFE277D9D52002A796C /* SMRCVCircleLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVCircleLayoutController.h; sourceTree = "<group>"; };
+		1DC58AFF277D9D52002A796C /* SMRCVCircleLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVCircleLayoutController.m; sourceTree = "<group>"; };
+		1DC58B04277DA452002A796C /* SMRCVSquareLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVSquareLayoutController.h; sourceTree = "<group>"; };
+		1DC58B05277DA452002A796C /* SMRCVSquareLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSquareLayoutController.m; sourceTree = "<group>"; };
+		1DC58B07277DA4A0002A796C /* SMRCVSquareLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVSquareLayout.h; sourceTree = "<group>"; };
+		1DC58B08277DA4A0002A796C /* SMRCVSquareLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSquareLayout.m; sourceTree = "<group>"; };
+		1DC58B0A277DA75B002A796C /* SMRCVWaterfallLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVWaterfallLayout.h; sourceTree = "<group>"; };
+		1DC58B0B277DA75B002A796C /* SMRCVWaterfallLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVWaterfallLayout.m; sourceTree = "<group>"; };
+		1DC58B0D277DA77B002A796C /* SMRCVWaterfallLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVWaterfallLayoutController.h; sourceTree = "<group>"; };
+		1DC58B0E277DA77B002A796C /* SMRCVWaterfallLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVWaterfallLayoutController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +110,12 @@
 			children = (
 				1DC58AF2277D99C0002A796C /* SMRCVLineLayout.h */,
 				1DC58AF3277D99C0002A796C /* SMRCVLineLayout.m */,
+				1DC58AFB277D9D3E002A796C /* SMRCVCircleLayout.h */,
+				1DC58AFC277D9D3E002A796C /* SMRCVCircleLayout.m */,
+				1DC58B07277DA4A0002A796C /* SMRCVSquareLayout.h */,
+				1DC58B08277DA4A0002A796C /* SMRCVSquareLayout.m */,
+				1DC58B0A277DA75B002A796C /* SMRCVWaterfallLayout.h */,
+				1DC58B0B277DA75B002A796C /* SMRCVWaterfallLayout.m */,
 			);
 			name = SMRCVLayouts;
 			path = SMRCollectionViewLayouts/SMRCVLayouts;
@@ -104,6 +128,12 @@
 				1DC58AF9277D9A50002A796C /* SMRCVLayoutController.m */,
 				1DC58AF5277D99FF002A796C /* SMRCVLineLayoutController.h */,
 				1DC58AF6277D99FF002A796C /* SMRCVLineLayoutController.m */,
+				1DC58AFE277D9D52002A796C /* SMRCVCircleLayoutController.h */,
+				1DC58AFF277D9D52002A796C /* SMRCVCircleLayoutController.m */,
+				1DC58B04277DA452002A796C /* SMRCVSquareLayoutController.h */,
+				1DC58B05277DA452002A796C /* SMRCVSquareLayoutController.m */,
+				1DC58B0D277DA77B002A796C /* SMRCVWaterfallLayoutController.h */,
+				1DC58B0E277DA77B002A796C /* SMRCVWaterfallLayoutController.m */,
 			);
 			path = SMRCVDemos;
 			sourceTree = "<group>";
@@ -178,10 +208,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DC58B00277D9D52002A796C /* SMRCVCircleLayoutController.m in Sources */,
 				1DC58AD2277D84F4002A796C /* ViewController.m in Sources */,
+				1DC58AFD277D9D3E002A796C /* SMRCVCircleLayout.m in Sources */,
 				1DC58ACC277D84F4002A796C /* AppDelegate.m in Sources */,
+				1DC58B06277DA452002A796C /* SMRCVSquareLayoutController.m in Sources */,
 				1DC58ADD277D84F7002A796C /* main.m in Sources */,
 				1DC58AF7277D99FF002A796C /* SMRCVLineLayoutController.m in Sources */,
+				1DC58B09277DA4A0002A796C /* SMRCVSquareLayout.m in Sources */,
+				1DC58B0F277DA77B002A796C /* SMRCVWaterfallLayoutController.m in Sources */,
+				1DC58B0C277DA75B002A796C /* SMRCVWaterfallLayout.m in Sources */,
 				1DC58AFA277D9A50002A796C /* SMRCVLayoutController.m in Sources */,
 				1DC58ACF277D84F4002A796C /* SceneDelegate.m in Sources */,
 				1DC58AF4277D99C0002A796C /* SMRCVLineLayout.m in Sources */,

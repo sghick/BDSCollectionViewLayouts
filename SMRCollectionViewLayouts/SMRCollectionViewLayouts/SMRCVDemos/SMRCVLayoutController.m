@@ -33,11 +33,27 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell"
                                                                            forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
-    cell.largeContentTitle = self.dataSource[indexPath.row];
+    cell.backgroundColor = self.class.randomColor;
+    UILabel *label = [cell.contentView viewWithTag:100];
+    if (!label) {
+        label = [[UILabel alloc] init];
+        label.tag = 100;
+        label.textColor = self.class.randomColor;
+        label.textAlignment = NSTextAlignmentCenter;
+        [cell.contentView addSubview:label];
+    }
+    label.frame = cell.contentView.bounds;
+    label.text = self.dataSource[indexPath.row];
     return cell;
 }
 
++ (UIColor *)randomColor {
+    CGFloat red = (arc4random()%255)/255.0;
+    CGFloat green = (arc4random()%255)/255.0;
+    CGFloat blue = (arc4random()%255)/255.0;
+    UIColor *color = [UIColor colorWithRed:red green:green blue:blue alpha:1];
+    return color;
+}
 
 #pragma mark - SMRCVLayoutProtocol
 
@@ -59,6 +75,7 @@
     if (!_collectionView) {
         _collectionView =
         [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.viewLayout];
+        _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         
