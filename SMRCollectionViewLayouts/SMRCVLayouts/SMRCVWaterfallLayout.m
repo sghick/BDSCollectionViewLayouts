@@ -9,8 +9,6 @@
 
 @interface SMRCVWaterfallLayout ()
 
-/** 存放所有cell的布局属性 */
-@property (nonatomic, strong) NSMutableArray *attrsArray;
 /** 存放所有列的当前高度 */
 @property (nonatomic, strong) NSMutableArray *columnHeights;
 /** 内容的高度 */
@@ -21,25 +19,12 @@
 @implementation SMRCVWaterfallLayout
 
 - (void)prepareLayout {
-    [super prepareLayout];
     self.contentHeight = 0;
     [self.columnHeights removeAllObjects];
     for (NSInteger i = 0; i < self.columnCount; i++) {
         [self.columnHeights addObject:@(self.edgeInsets.top)];
     }
-
-    [self.attrsArray removeAllObjects];
-    NSInteger count = [self.collectionView numberOfItemsInSection:0];
-    for (NSInteger i = 0; i < count; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        UICollectionViewLayoutAttributes *attrs =
-        [self layoutAttributesForItemAtIndexPath:indexPath];
-        [self.attrsArray addObject:attrs];
-    }
-}
-
-- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    return self.attrsArray;
+    [super prepareLayout];
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -57,7 +42,6 @@
     for (NSInteger i = 1; i < self.columnCount; i++) {
         // 取得第i列的高度
         CGFloat columnHeight = [self.columnHeights[i] doubleValue];
-        
         if (minColumnHeight > columnHeight) {
             minColumnHeight = columnHeight;
             destColumn = i;
@@ -85,13 +69,6 @@
 
 - (CGSize)collectionViewContentSize {
     return CGSizeMake(0, self.contentHeight + self.edgeInsets.bottom);
-}
-
-- (NSMutableArray *)attrsArray {
-    if (!_attrsArray) {
-        _attrsArray = [NSMutableArray array];
-    }
-    return _attrsArray;
 }
 
 - (NSMutableArray *)columnHeights {

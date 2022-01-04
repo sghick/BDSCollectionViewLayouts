@@ -5,11 +5,11 @@
 //  Created by Tinswin on 2021/12/30.
 //
 
-#import <UIKit/UIKit.h>
+#import "SMRCVLayout.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SMRCVCircleLayout : UICollectionViewLayout
+@interface SMRCVCircleLayout : SMRCVLayout
 
 @end
 

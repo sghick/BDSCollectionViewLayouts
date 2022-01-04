@@ -25,6 +25,7 @@
 		1DC58B0F277DA77B002A796C /* SMRCVWaterfallLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B0E277DA77B002A796C /* SMRCVWaterfallLayoutController.m */; };
 		1DC58B15277ED6EC002A796C /* SMRCVSliderLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B14277ED6EC002A796C /* SMRCVSliderLayout.m */; };
 		1DC58B18277EDA15002A796C /* SMRCVSliderLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B17277EDA15002A796C /* SMRCVSliderLayoutController.m */; };
+		1DC58B1B2783E415002A796C /* SMRCVLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B1A2783E415002A796C /* SMRCVLayout.m */; };
 		EB316A8DF222606FDCF4856B /* Pods_SMRCollectionViewLayouts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88664EBD45499D2579FFDA6C /* Pods_SMRCollectionViewLayouts.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,8 @@
 		1DC58B14277ED6EC002A796C /* SMRCVSliderLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderLayout.m; sourceTree = "<group>"; };
 		1DC58B16277EDA15002A796C /* SMRCVSliderLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVSliderLayoutController.h; sourceTree = "<group>"; };
 		1DC58B17277EDA15002A796C /* SMRCVSliderLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderLayoutController.m; sourceTree = "<group>"; };
+		1DC58B192783E415002A796C /* SMRCVLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVLayout.h; sourceTree = "<group>"; };
+		1DC58B1A2783E415002A796C /* SMRCVLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVLayout.m; sourceTree = "<group>"; };
 		3D3D495B2CD0E739FAC93A2F /* Pods-SMRCollectionViewLayouts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMRCollectionViewLayouts.debug.xcconfig"; path = "Target Support Files/Pods-SMRCollectionViewLayouts/Pods-SMRCollectionViewLayouts.debug.xcconfig"; sourceTree = "<group>"; };
 		88664EBD45499D2579FFDA6C /* Pods_SMRCollectionViewLayouts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SMRCollectionViewLayouts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A10F61B92EAB8F59E8E941 /* Pods-SMRCollectionViewLayouts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMRCollectionViewLayouts.release.xcconfig"; path = "Target Support Files/Pods-SMRCollectionViewLayouts/Pods-SMRCollectionViewLayouts.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,16 +124,18 @@
 		1DC58AE4277D88A1002A796C /* SMRCVLayouts */ = {
 			isa = PBXGroup;
 			children = (
+				1DC58B192783E415002A796C /* SMRCVLayout.h */,
+				1DC58B1A2783E415002A796C /* SMRCVLayout.m */,
 				1DC58AF2277D99C0002A796C /* SMRCVLineLayout.h */,
 				1DC58AF3277D99C0002A796C /* SMRCVLineLayout.m */,
+				1DC58B13277ED6EC002A796C /* SMRCVSliderLayout.h */,
+				1DC58B14277ED6EC002A796C /* SMRCVSliderLayout.m */,
 				1DC58AFB277D9D3E002A796C /* SMRCVCircleLayout.h */,
 				1DC58AFC277D9D3E002A796C /* SMRCVCircleLayout.m */,
 				1DC58B07277DA4A0002A796C /* SMRCVSquareLayout.h */,
 				1DC58B08277DA4A0002A796C /* SMRCVSquareLayout.m */,
 				1DC58B0A277DA75B002A796C /* SMRCVWaterfallLayout.h */,
 				1DC58B0B277DA75B002A796C /* SMRCVWaterfallLayout.m */,
-				1DC58B13277ED6EC002A796C /* SMRCVSliderLayout.h */,
-				1DC58B14277ED6EC002A796C /* SMRCVSliderLayout.m */,
 			);
 			name = SMRCVLayouts;
 			path = SMRCollectionViewLayouts/SMRCVLayouts;
@@ -143,14 +148,14 @@
 				1DC58AF9277D9A50002A796C /* SMRCVLayoutController.m */,
 				1DC58AF5277D99FF002A796C /* SMRCVLineLayoutController.h */,
 				1DC58AF6277D99FF002A796C /* SMRCVLineLayoutController.m */,
+				1DC58B16277EDA15002A796C /* SMRCVSliderLayoutController.h */,
+				1DC58B17277EDA15002A796C /* SMRCVSliderLayoutController.m */,
 				1DC58AFE277D9D52002A796C /* SMRCVCircleLayoutController.h */,
 				1DC58AFF277D9D52002A796C /* SMRCVCircleLayoutController.m */,
 				1DC58B04277DA452002A796C /* SMRCVSquareLayoutController.h */,
 				1DC58B05277DA452002A796C /* SMRCVSquareLayoutController.m */,
 				1DC58B0D277DA77B002A796C /* SMRCVWaterfallLayoutController.h */,
 				1DC58B0E277DA77B002A796C /* SMRCVWaterfallLayoutController.m */,
-				1DC58B16277EDA15002A796C /* SMRCVSliderLayoutController.h */,
-				1DC58B17277EDA15002A796C /* SMRCVSliderLayoutController.m */,
 			);
 			path = SMRCVDemos;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DC58B00277D9D52002A796C /* SMRCVCircleLayoutController.m in Sources */,
+				1DC58B1B2783E415002A796C /* SMRCVLayout.m in Sources */,
 				1DC58AD2277D84F4002A796C /* ViewController.m in Sources */,
 				1DC58B15277ED6EC002A796C /* SMRCVSliderLayout.m in Sources */,
 				1DC58B18277EDA15002A796C /* SMRCVSliderLayoutController.m in Sources */,
