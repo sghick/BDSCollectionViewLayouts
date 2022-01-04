@@ -21,6 +21,10 @@
 
 - (UICollectionViewLayout *)collectionViewLayout {
     SMRCVSliderLayout *viewLayout = [[SMRCVSliderLayout alloc] init];
+    viewLayout.itemSize = CGSizeMake(300, 200);
+    viewLayout.visibleItemsCount = 4;
+    viewLayout.spacing = 11;
+    viewLayout.minScale = 0.8;
     return viewLayout;
 }
 

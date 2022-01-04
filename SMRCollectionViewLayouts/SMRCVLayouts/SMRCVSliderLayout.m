@@ -9,10 +9,6 @@
 
 @interface SMRCVSliderLayout ()
 
-@property (assign, nonatomic) NSInteger visibleItemsCount;
-@property (assign, nonatomic) CGFloat minScale;
-@property (assign, nonatomic) CGFloat spacing;
-
 @end
 
 @implementation SMRCVSliderLayout
@@ -20,10 +16,7 @@
 - (void)prepareLayout {
     [super prepareLayout];
     
-    self.itemSize = CGSizeMake(300, 200);
-    self.visibleItemsCount = 4;
-    self.spacing = 11;
-    self.minScale = 0.8;
+    self.collectionView.pagingEnabled = YES;
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
