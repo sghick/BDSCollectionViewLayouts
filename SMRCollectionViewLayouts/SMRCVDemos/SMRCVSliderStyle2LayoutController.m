@@ -16,12 +16,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CGRect frame = self.collectionView.frame;
+    frame = CGRectMake(0, 0, frame.size.width, 200);
+    self.collectionView.frame = frame;
+    self.collectionView.center = self.view.center;
 }
 
 - (UICollectionViewLayout *)collectionViewLayout {
     SMRCVSliderStyle2Layout *layout = [[SMRCVSliderStyle2Layout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(300, 200);
+    layout.visibleItemsCount = 4;
     return layout;
 }
 

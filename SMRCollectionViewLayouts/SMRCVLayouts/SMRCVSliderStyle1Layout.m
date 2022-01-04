@@ -24,7 +24,7 @@
     MAX(MIN(itemsCount - 1, self.currentPage + self.visibleItemsCount), minVisibleIndex);
 
     NSMutableArray *mArr = [[NSMutableArray alloc] init];
-    for (NSInteger i = minVisibleIndex; i<= maxVisibleIndex; i++) {
+    for (NSInteger i = minVisibleIndex; i <= maxVisibleIndex; i++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
          UICollectionViewLayoutAttributes *attributes =
         [self layoutAttributesForIndexPath:indexPath currentPage:self.currentPage offset:offset offsetProgress:offsetProgress];

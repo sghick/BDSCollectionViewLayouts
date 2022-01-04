@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SMRCVSliderStyle2Layout : SMRCVSliderLayout
 
+@property (assign, nonatomic) NSInteger visibleItemsCount;
+
 @end
 
 NS_ASSUME_NONNULL_END
