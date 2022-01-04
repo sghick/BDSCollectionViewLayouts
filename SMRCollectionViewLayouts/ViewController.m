@@ -18,7 +18,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    NSString *clsStr = @"SMRCVSquareLayoutController";
+    NSString *clsStr = @"SMRCVWaterfallLayoutController";
     Class cls = NSClassFromString(clsStr);
     UIViewController *vc = [[cls alloc] init];
     [self.navigationController pushViewController:vc animated:YES];

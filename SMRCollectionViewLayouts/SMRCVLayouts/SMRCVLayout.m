@@ -9,33 +9,17 @@
 
 @implementation SMRCVLayout
 
-- (void)prepareLayout {
-    [super prepareLayout];
-    [self p_loadAllAttrs];
-}
-
-- (void)p_loadAllAttrs {
-    [self.attrs removeAllObjects];
-    NSInteger count = [self.collectionView numberOfItemsInSection:0];
+- (NSArray<UICollectionViewLayoutAttributes *> *)loadAttributesInSection:(NSInteger)section {
+    NSMutableArray *arr = [NSMutableArray array];
+    NSInteger count = [self.collectionView numberOfItemsInSection:section];
     for (int i = 0; i < count; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:section];
         UICollectionViewLayoutAttributes *attrs =
         [self layoutAttributesForItemAtIndexPath:indexPath];
-        [self.attrs addObject:attrs];
+        if (attrs) {
+            [arr addObject:attrs];
+        }
     }
+    return arr;
 }
-
-- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
-    return self.attrs;
-}
-
-#pragma mark - Getters
-
-- (NSMutableArray *)attrs {
-    if (!_attrs) {
-        _attrs = [NSMutableArray array];
-    }
-    return _attrs;
-}
-
 @end

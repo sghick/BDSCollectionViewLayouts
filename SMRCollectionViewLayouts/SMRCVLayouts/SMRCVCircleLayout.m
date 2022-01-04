@@ -7,7 +7,22 @@
 
 #import "SMRCVCircleLayout.h"
 
+@interface SMRCVCircleLayout ()
+
+@property (strong, nonatomic) NSArray *attrs;
+
+@end
+
 @implementation SMRCVCircleLayout
+
+- (void)prepareLayout {
+    [super prepareLayout];
+    _attrs = [self loadAttributesInSection:0];
+}
+
+- (NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
+    return self.attrs;
+}
 
 #pragma mark -
 

@@ -9,6 +9,7 @@
 
 @interface SMRCVWaterfallLayout ()
 
+@property (strong, nonatomic) NSArray *attrs;
 /** 存放所有列的当前高度 */
 @property (nonatomic, strong) NSMutableArray *columnHeights;
 /** 内容的高度 */
@@ -19,12 +20,17 @@
 @implementation SMRCVWaterfallLayout
 
 - (void)prepareLayout {
+    [super prepareLayout];
     self.contentHeight = 0;
     [self.columnHeights removeAllObjects];
     for (NSInteger i = 0; i < self.columnCount; i++) {
         [self.columnHeights addObject:@(self.edgeInsets.top)];
     }
-    [super prepareLayout];
+    _attrs = [self loadAttributesInSection:0];
+}
+
+- (NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
+    return self.attrs;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {

@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SMRCVLayout : UICollectionViewLayout
 
-@property(strong, nonatomic) NSMutableArray *attrs;
+- (NSArray<UICollectionViewLayoutAttributes *> *)loadAttributesInSection:(NSInteger)section;
 
 @end
 
