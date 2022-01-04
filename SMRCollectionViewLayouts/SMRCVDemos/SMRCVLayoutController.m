@@ -10,13 +10,14 @@
 
 @interface SMRCVLayoutController ()
 
-@property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) UICollectionViewLayout *viewLayout;
 @property (strong, nonatomic) NSArray *dataSource;
 
 @end
 
 @implementation SMRCVLayoutController
+
+@synthesize collectionView = _collectionView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

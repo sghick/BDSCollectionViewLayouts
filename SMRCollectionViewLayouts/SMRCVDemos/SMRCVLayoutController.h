@@ -21,6 +21,8 @@ UICollectionViewDataSource,
 UICollectionViewDelegate
 >
 
+@property (strong, nonatomic, readonly) UICollectionView *collectionView;
+
 @end
 
 NS_ASSUME_NONNULL_END

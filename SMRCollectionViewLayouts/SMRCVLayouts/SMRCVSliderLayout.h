@@ -11,9 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SMRCVSliderLayout : UICollectionViewFlowLayout
 
-@property (assign, nonatomic) NSInteger visibleItemsCount;
-@property (assign, nonatomic) CGFloat minScale;
-@property (assign, nonatomic) CGFloat spacing;
+@property (assign, nonatomic, readonly) NSInteger itemsCount;
+@property (assign, nonatomic, readonly) CGSize collectionViewSize;
+@property (assign, nonatomic, readonly) CGPoint contentOffset;
+@property (assign, nonatomic, readonly) NSInteger currentPage;
 
 @end
 
