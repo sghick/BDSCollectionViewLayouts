@@ -13,14 +13,6 @@
 
 @implementation SMRCVSliderLayout
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    }
-    return self;
-}
-
 - (void)prepareLayout {
     [super prepareLayout];
 }

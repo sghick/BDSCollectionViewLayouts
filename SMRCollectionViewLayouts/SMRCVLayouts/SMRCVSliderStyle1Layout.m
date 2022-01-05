@@ -9,6 +9,14 @@
 
 @implementation SMRCVSliderStyle1Layout
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    }
+    return self;
+}
+
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     NSInteger itemsCount = self.itemsCount;
     NSInteger currentPage = self.currentPage;

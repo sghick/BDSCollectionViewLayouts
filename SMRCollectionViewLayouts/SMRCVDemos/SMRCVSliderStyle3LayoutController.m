@@ -20,12 +20,15 @@
     frame = CGRectMake(0, 0, frame.size.width, 200);
     self.collectionView.frame = frame;
     self.collectionView.center = self.view.center;
+    self.collectionView.pagingEnabled = YES;
 }
 
 - (UICollectionViewLayout *)collectionViewLayout {
     SMRCVSliderStyle3Layout *layout = [[SMRCVSliderStyle3Layout alloc] init];
     layout.itemSize = CGSizeMake(300, 200);
-    layout.visibleItemsCount = 3;
+    layout.visibleItemsCount = 5;
+    layout.spacing = 10;
+    layout.minScale = 0.8;
     return layout;
 }
 

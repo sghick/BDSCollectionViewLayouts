@@ -25,7 +25,6 @@
 - (UICollectionViewLayout *)collectionViewLayout {
     SMRCVSliderStyle2Layout *layout = [[SMRCVSliderStyle2Layout alloc] init];
     layout.itemSize = CGSizeMake(300, 200);
-    layout.visibleItemsCount = 4;
     return layout;
 }
 

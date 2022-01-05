@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface SMRCVSliderStyle2Layout : SMRCVSliderLayout
 
-@property (assign, nonatomic) NSInteger visibleItemsCount;
+@property (assign, nonatomic) CGFloat scaleRate; ///< 默认1.4, (0, n),值越大,变化幅度越大
 
 @end
 

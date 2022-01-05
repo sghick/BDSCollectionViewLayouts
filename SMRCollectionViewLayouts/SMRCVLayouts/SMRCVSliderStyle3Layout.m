@@ -9,49 +9,70 @@
 
 @implementation SMRCVSliderStyle3Layout
 
-- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSMutableArray *arr = [NSMutableArray array];
-    for (int i = 0; i < self.itemsCount; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        UICollectionViewLayoutAttributes *attrs =
-        [self layoutAttributesForItemAtIndexPath:indexPath];
-        [arr addObject:attrs];
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     }
-    return [arr copy];
+    return self;
+}
+
+- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
+    NSInteger itemsCount = self.itemsCount;
+    NSInteger currentPage = self.currentPage;
+    NSInteger visibleItemsCount = self.visibleItemsCount;
+    if (itemsCount <= 0) {
+        return nil;
+    }
+    
+    NSRange range = NSMakeRange(currentPage, MIN(visibleItemsCount, itemsCount - currentPage));
+    NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
+    NSMutableArray *arr = [NSMutableArray array];
+    [set enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        NSInteger realIndex = idx%itemsCount;
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:realIndex inSection:0];
+        UICollectionViewLayoutAttributes *attr = [self layoutAttributesForItemAtIndexPath:indexPath];
+        [arr addObject:attr];
+    }];
+    return arr;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    // 在原有布局属性的基础上，进行微调
-    UICollectionViewLayoutAttributes *attrs =
+    NSInteger currentPage = self.currentPage;
+    CGPoint contentOffset = self.contentOffset;
+    CGFloat offset = (int)(contentOffset.x)%(int)(self.collectionViewSize.width);
+    CGFloat offsetProgress = offset/self.collectionViewSize.width*1.0f;
+    CGFloat spacing = self.spacing;
+    CGFloat minScale = self.minScale;
+    CGSize collectionViewSize = self.collectionViewSize;
+    CGSize itemSize = self.itemSize;
+    
+    UICollectionViewLayoutAttributes *attributes =
     [super layoutAttributesForItemAtIndexPath:indexPath];
-    CGFloat contentMargin = self.contentMargin;
-    // 计算collectionView最中心点的x值
-    CGFloat centerX = self.contentOffset.x + self.collectionViewSize.width*0.5;
-    CGFloat centerY = self.collectionViewSize.height*0.5;
-    // cell的中心点x 和 collectionView最中心点的x值 的间距
-    CGFloat delta = fabs(attrs.center.x - centerX);
-    // 根据间距值 计算 cell的缩放比例
-    CGFloat scale = delta / self.collectionView.frame.size.width * 1.4;
-    //把卡片移动范围固定到 -π/4到 +π/4这一个范围内
-    scale = fabs(cos(scale * M_PI/4));
-    // 设置缩放比例
-    attrs.transform = CGAffineTransformMakeScale(1, scale);
-    // 设置中心位置
-    attrs.center = CGPointMake(contentMargin + attrs.center.x, centerY);
-    return attrs;
+    
+    NSInteger visibleIndex = MAX(indexPath.item - currentPage + 1, 0);
+    attributes.size = itemSize;
+    CGFloat topCardMidX = contentOffset.x + collectionViewSize.width/2;
+    attributes.center = CGPointMake(topCardMidX + spacing*(visibleIndex - 1), collectionViewSize.height/2);
+    attributes.zIndex = 1000 - visibleIndex;
+    CGFloat scale =
+    [self parallaxProgressForVisibleIndex:visibleIndex
+                           offsetProgress:offsetProgress
+                                 minScale:minScale];
+    attributes.transform = CGAffineTransformMakeScale(scale, scale);
+    if (visibleIndex == 1) {
+        attributes.center = CGPointMake(attributes.center.x - offset, attributes.center.y);
+    } else {
+        attributes.center = CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - spacing * offsetProgress, attributes.center.y);
+    }
+    return attributes;
 }
 
-- (CGSize)collectionViewContentSize {
-    CGSize size = [super collectionViewContentSize];
-    CGFloat width =
-    self.itemSize.width*self.itemsCount +
-    self.minimumInteritemSpacing*(self.itemsCount - 1) +
-    (self.collectionViewSize.width - self.itemSize.width);
-    return CGSizeMake(width, size.height);
-}
-
-- (CGFloat)contentMargin {
-    return (self.collectionViewSize.width - self.itemSize.width)/2;
+- (CGFloat)parallaxProgressForVisibleIndex:(NSInteger)visibleIndex
+                            offsetProgress:(CGFloat)offsetProgress
+                                  minScale:(CGFloat)minScale {
+    CGFloat step = (1.0 - minScale)/(self.visibleItemsCount - 1)*1.0;
+    return (1.0 - (visibleIndex - 1) * step + step * offsetProgress);
 }
 
 @end
