@@ -23,7 +23,7 @@
     for (int i = 0; i < self.itemsCount; i++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
         UICollectionViewLayoutAttributes *attrs =
-        [self layoutAttributesForItemAtIndexPath:indexPath];
+        [[self layoutAttributesForItemAtIndexPath:indexPath] copy];
         [arr addObject:attrs];
     }
     return [arr copy];

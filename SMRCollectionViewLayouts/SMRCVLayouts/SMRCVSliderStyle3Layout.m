@@ -48,7 +48,7 @@
     CGSize itemSize = self.itemSize;
     
     UICollectionViewLayoutAttributes *attributes =
-    [super layoutAttributesForItemAtIndexPath:indexPath];
+    [[super layoutAttributesForItemAtIndexPath:indexPath] copy];
     
     NSInteger visibleIndex = MAX(indexPath.item - currentPage + 1, 0);
     attributes.size = itemSize;
