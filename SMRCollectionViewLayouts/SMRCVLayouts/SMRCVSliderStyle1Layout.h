@@ -9,6 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ 请设置itemSize,且collectionView的高不能超过itemSize.height的2倍
+ */
 @interface SMRCVSliderStyle1Layout : SMRCVSliderLayout
 
 @property (assign, nonatomic) NSInteger visibleItemsCount;

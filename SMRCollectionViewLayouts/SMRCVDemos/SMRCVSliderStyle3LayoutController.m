@@ -1,18 +1,18 @@
 //
-//  SMRCVSliderStyle2LayoutController.m
+//  SMRCVSliderStyle3LayoutController.m
 //  SMRCollectionViewLayouts
 //
 //  Created by Tinswin on 2022/1/4.
 //
 
-#import "SMRCVSliderStyle2LayoutController.h"
-#import "SMRCVSliderStyle2Layout.h"
+#import "SMRCVSliderStyle3LayoutController.h"
+#import "SMRCVSliderStyle3Layout.h"
 
-@interface SMRCVSliderStyle2LayoutController ()
+@interface SMRCVSliderStyle3LayoutController ()
 
 @end
 
-@implementation SMRCVSliderStyle2LayoutController
+@implementation SMRCVSliderStyle3LayoutController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,9 +23,9 @@
 }
 
 - (UICollectionViewLayout *)collectionViewLayout {
-    SMRCVSliderStyle2Layout *layout = [[SMRCVSliderStyle2Layout alloc] init];
+    SMRCVSliderStyle3Layout *layout = [[SMRCVSliderStyle3Layout alloc] init];
     layout.itemSize = CGSizeMake(300, 200);
-    layout.visibleItemsCount = 4;
+    layout.visibleItemsCount = 3;
     return layout;
 }
 

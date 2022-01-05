@@ -11,6 +11,8 @@
 		1D463688278433BE00B63594 /* SMRCVSliderStyle1Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D463687278433BE00B63594 /* SMRCVSliderStyle1Layout.m */; };
 		1D46368B2784358900B63594 /* SMRCVSliderStyle1LayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D46368A2784358900B63594 /* SMRCVSliderStyle1LayoutController.m */; };
 		1D46368E2784359500B63594 /* SMRCVSliderStyle2LayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D46368D2784359500B63594 /* SMRCVSliderStyle2LayoutController.m */; };
+		1D46369127845C8700B63594 /* SMRCVSliderStyle3LayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D46369027845C8700B63594 /* SMRCVSliderStyle3LayoutController.m */; };
+		1D46369427845CA200B63594 /* SMRCVSliderStyle3Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D46369327845CA200B63594 /* SMRCVSliderStyle3Layout.m */; };
 		1DC58ACC277D84F4002A796C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58ACB277D84F4002A796C /* AppDelegate.m */; };
 		1DC58ACF277D84F4002A796C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58ACE277D84F4002A796C /* SceneDelegate.m */; };
 		1DC58AD2277D84F4002A796C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58AD1277D84F4002A796C /* ViewController.m */; };
@@ -40,6 +42,10 @@
 		1D46368A2784358900B63594 /* SMRCVSliderStyle1LayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderStyle1LayoutController.m; sourceTree = "<group>"; };
 		1D46368C2784359500B63594 /* SMRCVSliderStyle2LayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVSliderStyle2LayoutController.h; sourceTree = "<group>"; };
 		1D46368D2784359500B63594 /* SMRCVSliderStyle2LayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderStyle2LayoutController.m; sourceTree = "<group>"; };
+		1D46368F27845C8700B63594 /* SMRCVSliderStyle3LayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVSliderStyle3LayoutController.h; sourceTree = "<group>"; };
+		1D46369027845C8700B63594 /* SMRCVSliderStyle3LayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderStyle3LayoutController.m; sourceTree = "<group>"; };
+		1D46369227845CA200B63594 /* SMRCVSliderStyle3Layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVSliderStyle3Layout.h; sourceTree = "<group>"; };
+		1D46369327845CA200B63594 /* SMRCVSliderStyle3Layout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderStyle3Layout.m; sourceTree = "<group>"; };
 		1DC58AC7277D84F3002A796C /* SMRCollectionViewLayouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMRCollectionViewLayouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DC58ACA277D84F4002A796C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1DC58ACB277D84F4002A796C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -144,6 +150,8 @@
 				1D463687278433BE00B63594 /* SMRCVSliderStyle1Layout.m */,
 				1D463683278433B100B63594 /* SMRCVSliderStyle2Layout.h */,
 				1D463684278433B100B63594 /* SMRCVSliderStyle2Layout.m */,
+				1D46369227845CA200B63594 /* SMRCVSliderStyle3Layout.h */,
+				1D46369327845CA200B63594 /* SMRCVSliderStyle3Layout.m */,
 			);
 			name = SMRCVLayouts;
 			path = SMRCollectionViewLayouts/SMRCVLayouts;
@@ -166,6 +174,8 @@
 				1D46368A2784358900B63594 /* SMRCVSliderStyle1LayoutController.m */,
 				1D46368C2784359500B63594 /* SMRCVSliderStyle2LayoutController.h */,
 				1D46368D2784359500B63594 /* SMRCVSliderStyle2LayoutController.m */,
+				1D46368F27845C8700B63594 /* SMRCVSliderStyle3LayoutController.h */,
+				1D46369027845C8700B63594 /* SMRCVSliderStyle3LayoutController.m */,
 			);
 			path = SMRCVDemos;
 			sourceTree = "<group>";
@@ -305,6 +315,7 @@
 				1D463688278433BE00B63594 /* SMRCVSliderStyle1Layout.m in Sources */,
 				1D46368E2784359500B63594 /* SMRCVSliderStyle2LayoutController.m in Sources */,
 				1DC58B1B2783E415002A796C /* SMRCVLayout.m in Sources */,
+				1D46369427845CA200B63594 /* SMRCVSliderStyle3Layout.m in Sources */,
 				1D46368B2784358900B63594 /* SMRCVSliderStyle1LayoutController.m in Sources */,
 				1DC58AD2277D84F4002A796C /* ViewController.m in Sources */,
 				1DC58B15277ED6EC002A796C /* SMRCVSliderLayout.m in Sources */,
@@ -313,6 +324,7 @@
 				1DC58ACC277D84F4002A796C /* AppDelegate.m in Sources */,
 				1DC58B06277DA452002A796C /* SMRCVSquareLayoutController.m in Sources */,
 				1DC58ADD277D84F7002A796C /* main.m in Sources */,
+				1D46369127845C8700B63594 /* SMRCVSliderStyle3LayoutController.m in Sources */,
 				1DC58B09277DA4A0002A796C /* SMRCVSquareLayout.m in Sources */,
 				1DC58B0F277DA77B002A796C /* SMRCVWaterfallLayoutController.m in Sources */,
 				1DC58B0C277DA75B002A796C /* SMRCVWaterfallLayout.m in Sources */,

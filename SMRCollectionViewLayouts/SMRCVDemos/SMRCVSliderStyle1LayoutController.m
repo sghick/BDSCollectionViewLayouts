@@ -16,6 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CGRect frame = self.collectionView.frame;
+    frame = CGRectMake(0, 0, frame.size.width, 300);
+    self.collectionView.frame = frame;
+    self.collectionView.center = self.view.center;
     self.collectionView.pagingEnabled = YES;
 }
 
