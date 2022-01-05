@@ -50,17 +50,17 @@
     UICollectionViewLayoutAttributes *attributes =
     [[super layoutAttributesForItemAtIndexPath:indexPath] copy];
     
-    NSInteger visibleIndex = MAX(indexPath.item - currentPage + 1, 0);
+    NSInteger visibleIndex = MAX(indexPath.item - currentPage, 0);
     attributes.size = itemSize;
     CGFloat topCardMidX = contentOffset.x + collectionViewSize.width/2;
-    attributes.center = CGPointMake(topCardMidX + spacing*(visibleIndex - 1), collectionViewSize.height/2);
+    attributes.center = CGPointMake(topCardMidX + spacing*visibleIndex, collectionViewSize.height/2);
     attributes.zIndex = 1000 - visibleIndex;
     CGFloat scale =
     [self parallaxProgressForVisibleIndex:visibleIndex
                            offsetProgress:offsetProgress
                                  minScale:minScale];
     attributes.transform = CGAffineTransformMakeScale(scale, scale);
-    if (visibleIndex == 1) {
+    if (visibleIndex == 0) {
         attributes.center = CGPointMake(attributes.center.x - offset, attributes.center.y);
     } else {
         attributes.center = CGPointMake(attributes.center.x + attributes.size.width * (1 - scale)/2 - spacing * offsetProgress, attributes.center.y);
@@ -72,7 +72,7 @@
                             offsetProgress:(CGFloat)offsetProgress
                                   minScale:(CGFloat)minScale {
     CGFloat step = (1.0 - minScale)/(self.visibleItemsCount - 1)*1.0;
-    return (1.0 - (visibleIndex - 1) * step + step * offsetProgress);
+    return (1.0 - visibleIndex*step + step*offsetProgress);
 }
 
 @end
