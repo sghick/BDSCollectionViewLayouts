@@ -53,7 +53,6 @@
     CGSize collectionViewSize = self.collectionViewSize;
     CGSize itemSize = self.itemSize;
     NSInteger half = self.half;
-    NSInteger itemsCount = self.itemsCount;
     
     UICollectionViewLayoutAttributes *attributes =
     [[super layoutAttributesForItemAtIndexPath:indexPath] copy];
@@ -108,7 +107,7 @@
 //    return MAX(0, index);
 //}
 
-- (CGFloat)half {
+- (NSInteger)half {
     return floor(self.visibleItemsCount/2.0);
 }
 
