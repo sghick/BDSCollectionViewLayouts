@@ -34,10 +34,8 @@
     NSRange range = NSMakeRange(currentPage, MIN(visibleItemsCount, itemsCount));
     NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
     NSMutableArray *arr = [NSMutableArray array];
-    NSLog(@"page:%@", @(currentPage));
     [set enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
         NSInteger realIndex = idx%itemsCount;
-        NSLog(@"layout page:%@_%@", @(idx), @(realIndex));
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:realIndex inSection:0];
         UICollectionViewLayoutAttributes *attr =
         [self layoutAttributesForItemAtIndexPath:indexPath];
@@ -52,7 +50,6 @@
     CGFloat offset = (int)(contentOffset.x)%(int)(self.collectionViewSize.width);
     CGFloat offsetProgress = offset/self.collectionViewSize.width*1.0f;
     CGFloat spacing = self.spacing;
-    CGFloat minScale = self.minScale;
     CGSize collectionViewSize = self.collectionViewSize;
     CGSize itemSize = self.itemSize;
     NSInteger half = self.half;
@@ -63,29 +60,38 @@
     
     // -2,-1,0,1,2
     NSInteger visibleIndex = indexPath.item - currentPage - half;
-    NSLog(@"vis:%@", @(visibleIndex));
     attributes.size = itemSize;
     CGFloat topCardMidX = contentOffset.x + collectionViewSize.width/2;
     attributes.center = CGPointMake(topCardMidX + spacing*visibleIndex, collectionViewSize.height/2);
-    attributes.zIndex = 1000 - ABS(visibleIndex);
-    CGFloat scale =
-    [self parallaxProgressForVisibleIndex:visibleIndex
-                           offsetProgress:offsetProgress
-                                 minScale:minScale];
+    CGFloat scale = [self scaleForVisibleIndex:visibleIndex offsetProgress:offsetProgress];
+    CGFloat step = [self stepForVisibleIndex:visibleIndex offsetProgress:offsetProgress];
+    NSInteger level = ceil(scale*100);
+    attributes.zIndex = 1000 + level;
     attributes.transform = CGAffineTransformMakeScale(scale, scale);
-    if (visibleIndex > 0) {
-        attributes.center = CGPointMake(attributes.center.x + attributes.size.width*(1 - scale)/2 - spacing*offsetProgress, attributes.center.y);
-    } else {
-        attributes.center = CGPointMake(attributes.center.x + attributes.size.width*(scale - 1)/2 - spacing*offsetProgress, attributes.center.y);
-    }
+    attributes.center = CGPointMake(attributes.center.x + attributes.size.width*(1 - step)/2 - spacing*offsetProgress, attributes.center.y);
     return attributes;
 }
 
-- (CGFloat)parallaxProgressForVisibleIndex:(NSInteger)visibleIndex
-                            offsetProgress:(CGFloat)offsetProgress
-                                  minScale:(CGFloat)minScale {
-    CGFloat step = (1.0 - minScale)/(self.visibleItemsCount - 1)*1.0;
-    return (1.0 - ABS(visibleIndex)*step + step*offsetProgress);
+- (CGFloat)scaleForVisibleIndex:(NSInteger)visibleIndex
+                 offsetProgress:(CGFloat)offsetProgress {
+    CGFloat step = (1.0 - self.minScale)/self.half*1.0;
+    if (visibleIndex > 0) {
+        CGFloat scale = (1.0 - visibleIndex*step + step*offsetProgress);
+        return scale;
+    } else if (visibleIndex < 0) {
+        offsetProgress = 1 - offsetProgress;
+        CGFloat scale = (1.0 + (visibleIndex - 1)*step + step*offsetProgress);
+        return scale;
+    } else {
+        return 1 - step*offsetProgress;
+    }
+}
+
+- (CGFloat)stepForVisibleIndex:(NSInteger)visibleIndex
+                offsetProgress:(CGFloat)offsetProgress {
+    CGFloat step = (1.0 - self.minScale)/self.half*1.0;
+    CGFloat scale = (1.0 - visibleIndex*step + step*offsetProgress);
+    return scale;
 }
 
 //- (NSInteger)currentPage {
