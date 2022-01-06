@@ -67,4 +67,18 @@
     return (self.collectionViewSize.width - self.itemSize.width)/2;
 }
 
+//- (NSInteger)currentPage {
+//    if (self.collectionViewSize.width == 0 || self.collectionViewSize.height == 0) {
+//        return 0;
+//    }
+//    
+//    int index = 0;
+//    if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+//        index = (self.contentOffset.x + self.itemSize.width * 0.5) / self.itemSize.width;
+//    } else {
+//        index = (self.contentOffset.y + self.itemSize.height * 0.5) / self.itemSize.height;
+//    }
+//    return MAX(0, index);
+//}
+
 @end
