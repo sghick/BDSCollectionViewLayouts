@@ -9,7 +9,7 @@
 
 @interface SMRCVSliderStyle3Layout ()
 
-@property (assign, nonatomic) CGFloat half;
+@property (assign, nonatomic) NSInteger half;
 
 @end
 
