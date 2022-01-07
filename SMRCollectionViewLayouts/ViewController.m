@@ -40,6 +40,7 @@ UITableViewDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Layout";
     self.datas = @[
         [DemoItem itemWithName:@"默认" cls:@"SMRCVLayoutController"],
         [DemoItem itemWithName:@"环形" cls:@"SMRCVCircleLayoutController"],
@@ -75,6 +76,7 @@ UITableViewDelegate>
     Class cls = NSClassFromString(item.cls);
     UIViewController *vc = [[cls alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Getters
@@ -85,7 +87,7 @@ UITableViewDelegate>
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.frame = self.view.bounds;
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, self.view.window.safeAreaInsets.bottom + 20);
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, self.view.window.safeAreaInsets.bottom + 20, 0);
         
         [_tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cell"];
     }
