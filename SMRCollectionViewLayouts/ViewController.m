@@ -7,7 +7,32 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface DemoItem : NSObject
+
+@property (copy  , nonatomic) NSString *name;
+@property (copy  , nonatomic) NSString *cls;
+
++ (instancetype)itemWithName:(NSString *)name cls:(NSString *)cls;
+
+@end
+
+@implementation DemoItem
+
++ (instancetype)itemWithName:(NSString *)name cls:(NSString *)cls {
+    DemoItem *item = [[DemoItem alloc] init];
+    item.name = name;
+    item.cls = cls;
+    return item;
+}
+
+@end
+
+@interface ViewController ()<
+UITableViewDataSource,
+UITableViewDelegate>
+
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSArray<DemoItem *> *datas;
 
 @end
 
@@ -15,13 +40,56 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.datas = @[
+        [DemoItem itemWithName:@"默认" cls:@"SMRCVLayoutController"],
+        [DemoItem itemWithName:@"环形" cls:@"SMRCVCircleLayoutController"],
+        [DemoItem itemWithName:@"矩形" cls:@"SMRCVSquareLayoutController"],
+        [DemoItem itemWithName:@"瀑布流" cls:@"SMRCVWaterfallLayoutController"],
+        [DemoItem itemWithName:@"滑动1" cls:@"SMRCVSliderStyle1LayoutController"],
+        [DemoItem itemWithName:@"滑动2" cls:@"SMRCVSliderStyle2LayoutController"],
+        [DemoItem itemWithName:@"滑动3" cls:@"SMRCVSliderStyle3LayoutController"],
+        [DemoItem itemWithName:@"艺术墙" cls:@"SMRCVArtWallLayoutController"],
+    ];
+    [self.view addSubview:self.tableView];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    NSString *clsStr = @"SMRCVArtWallLayoutController";
-    Class cls = NSClassFromString(clsStr);
+#pragma mark - UITableViewDataSource, UITableViewDelegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.datas.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    DemoItem *item = self.datas[indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    cell.textLabel.text = item.name;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    DemoItem *item = self.datas[indexPath.row];
+    Class cls = NSClassFromString(item.cls);
     UIViewController *vc = [[cls alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - Getters
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.frame = self.view.bounds;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, self.view.window.safeAreaInsets.bottom + 20);
+        
+        [_tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"cell"];
+    }
+    return _tableView;
 }
 
 @end
