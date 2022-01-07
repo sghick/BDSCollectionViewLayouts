@@ -12,9 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class SMRCVWaterfallLayout;
 @protocol SMRCVWaterfallLayoutDelegate <NSObject>
 
-- (CGFloat)waterfallLayout:(SMRCVWaterfallLayout *)waterfallLayout
-      heightForItemAtIndex:(NSUInteger)index
-                 itemWidth:(CGFloat)itemWidth;
+- (CGFloat)waterfallLayout:(SMRCVWaterfallLayout *)waterfallLayout heightForItemAtIndex:(NSUInteger)index itemWidth:(CGFloat)itemWidth;
 
 @end
 

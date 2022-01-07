@@ -41,7 +41,7 @@
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attrs =
     [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-    CGFloat collectionViewW = self.collectionView.frame.size.width;
+    CGFloat collectionViewW = self.collectionViewSize.width;
     
     // 设置布局属性的frame
     CGFloat w = (collectionViewW - self.edgeInsets.left - self.edgeInsets.right - (self.columnCount - 1) * self.interitemSpacing) / self.columnCount;
