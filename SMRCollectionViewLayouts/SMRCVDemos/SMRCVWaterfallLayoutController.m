@@ -20,7 +20,7 @@ SMRCVWaterfallLayoutDelegate>
     // Do any additional setup after loading the view.
 }
 
-- (CGFloat)waterfallLayout:(SMRCVWaterfallLayout *)waterfallLayout heightForItemAtIndex:(NSUInteger)index itemWidth:(CGFloat)itemWidth {
+- (CGFloat)waterfallLayout:(SMRCVWaterfallLayout *)layout heightForItemAtIndex:(NSUInteger)index itemWidth:(CGFloat)itemWidth {
     CGFloat height = arc4random()%200 + 80;
     return height;
 }

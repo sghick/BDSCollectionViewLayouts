@@ -40,7 +40,7 @@ SMRCVArtWallLayoutDelegate>
 
 #pragma mark - SMRCVArtWallLayoutDelegate
 
-- (CGSize)artWallLayout:(SMRCVArtWallLayout *)waterfallLayout sizeForItemAtIndex:(NSUInteger)index {
+- (CGSize)artWallLayout:(SMRCVArtWallLayout *)layout sizeForItemAtIndex:(NSUInteger)index {
     NSInteger idx = index%self.sizes.count;
     return self.sizes[idx].CGSizeValue;
 }

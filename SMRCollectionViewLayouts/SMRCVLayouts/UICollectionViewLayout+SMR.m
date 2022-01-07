@@ -21,7 +21,7 @@
     for (NSInteger i = range.location; i < (range.location + range.length); i++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
         UICollectionViewLayoutAttributes *attr = [self layoutAttributesForItemAtIndexPath:indexPath];
-        [arr addObject:attr];
+        attr ? [arr addObject:attr] : NULL;
     }
     return [arr copy];
 }

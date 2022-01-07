@@ -22,7 +22,7 @@
     [super prepareLayout];
     self.attrs = [self attributesInSection:0];
     UICollectionViewLayoutAttributes *last = self.attrs.lastObject;
-    self.contentWidth = MAX(self.collectionViewSize.width, CGRectGetMaxX(last.frame));
+    self.contentWidth = CGRectGetMaxX(last.frame);
 }
 
 - (CGSize)collectionViewContentSize {
@@ -37,7 +37,7 @@
     UICollectionViewLayoutAttributes *attrs = self.cache[@(indexPath.item)];
     if (!attrs) {
         UICollectionViewLayoutAttributes *last = self.cache[@(indexPath.item - 1)];
-        attrs = [super layoutAttributesForItemAtIndexPath:indexPath];
+        attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
         
         CGRect frame = attrs.frame;
         CGFloat centerY = self.contentOffset.y + self.collectionViewSize.height/2;
@@ -68,7 +68,7 @@
 
 - (CGPoint)offsetWithSeedAttr:(UICollectionViewLayoutAttributes *)seedAttr {
     if (!seedAttr) return CGPointZero;
-    CGFloat width = CGRectGetWidth(seedAttr.frame);
+    CGFloat width = CGRectGetWidth(seedAttr.frame) ?: self.collectionViewSize.height/2;
     CGFloat height = CGRectGetHeight(seedAttr.frame);
     CGFloat x = [self p_offsetWithin:height/3 seed:arc4random()];
     CGFloat y = [self p_offsetWithin:width/3 seed:arc4random()];
@@ -78,6 +78,9 @@
 #pragma mark - Privates
 
 - (NSInteger)p_offsetWithin:(NSInteger)within seed:(NSInteger)seed {
+    if (within <= 0) {
+        return 0;
+    }
     return seed%(2*within) - within;
 }
 
