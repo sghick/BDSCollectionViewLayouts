@@ -6,6 +6,7 @@
 //
 
 #import "SMRCVCircleLayout.h"
+#import "UICollectionViewLayout+SMR.h"
 
 @interface SMRCVCircleLayout ()
 
@@ -17,14 +18,12 @@
 
 - (void)prepareLayout {
     [super prepareLayout];
-    _attrs = [self loadAttributesInSection:0];
+    _attrs = [self attributesInSection:0];
 }
 
 - (NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
     return self.attrs;
 }
-
-#pragma mark -
 
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger count = [self.collectionView numberOfItemsInSection:0];

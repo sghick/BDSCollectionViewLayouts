@@ -6,6 +6,7 @@
 //
 
 #import "SMRCVSliderStyle2Layout.h"
+#import "UICollectionViewLayout+SMR.h"
 
 @implementation SMRCVSliderStyle2Layout
 
@@ -18,15 +19,22 @@
     return self;
 }
 
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return YES;
+}
+
+- (CGSize)collectionViewContentSize {
+    CGSize size = [super collectionViewContentSize];
+    CGFloat width =
+    self.itemSize.width*self.itemsCount +
+    self.minimumInteritemSpacing*(self.itemsCount - 1) +
+    (self.collectionViewSize.width - self.itemSize.width);
+    return CGSizeMake(width, size.height);
+}
+
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSMutableArray *arr = [NSMutableArray array];
-    for (int i = 0; i < self.itemsCount; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        UICollectionViewLayoutAttributes *attrs =
-        [[self layoutAttributesForItemAtIndexPath:indexPath] copy];
-        [arr addObject:attrs];
-    }
-    return [arr copy];
+    NSArray *arr = [self attributesInSection:0];
+    return arr;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -34,7 +42,7 @@
     UICollectionViewLayoutAttributes *attrs =
     [super layoutAttributesForItemAtIndexPath:indexPath];
     CGFloat scaleRate = self.scaleRate;
-    CGFloat contentMargin = self.contentMargin;
+    CGFloat contentMargin = self.p_contentMargin;
     CGSize collectionViewSize = self.collectionViewSize;
     CGPoint contentOffset = self.contentOffset;
     
@@ -54,16 +62,9 @@
     return attrs;
 }
 
-- (CGSize)collectionViewContentSize {
-    CGSize size = [super collectionViewContentSize];
-    CGFloat width =
-    self.itemSize.width*self.itemsCount +
-    self.minimumInteritemSpacing*(self.itemsCount - 1) +
-    (self.collectionViewSize.width - self.itemSize.width);
-    return CGSizeMake(width, size.height);
-}
+#pragma mark - Privates
 
-- (CGFloat)contentMargin {
+- (CGFloat)p_contentMargin {
     return (self.collectionViewSize.width - self.itemSize.width)/2;
 }
 
@@ -71,7 +72,7 @@
 //    if (self.collectionViewSize.width == 0 || self.collectionViewSize.height == 0) {
 //        return 0;
 //    }
-//    
+//
 //    int index = 0;
 //    if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
 //        index = (self.contentOffset.x + self.itemSize.width * 0.5) / self.itemSize.width;

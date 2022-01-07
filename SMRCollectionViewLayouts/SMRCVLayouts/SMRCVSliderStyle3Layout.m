@@ -6,6 +6,7 @@
 //
 
 #import "SMRCVSliderStyle3Layout.h"
+#import "UICollectionViewLayout+SMR.h"
 
 @interface SMRCVSliderStyle3Layout ()
 
@@ -23,6 +24,15 @@
     return self;
 }
 
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return YES;
+}
+
+- (CGSize)collectionViewContentSize {
+    return CGSizeMake(self.collectionViewSize.width * self.itemsCount,
+                      self.collectionViewSize.height);
+}
+
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     NSInteger itemsCount = self.itemsCount;
     NSInteger currentPage = self.currentPage;
@@ -32,15 +42,7 @@
     }
     
     NSRange range = NSMakeRange(currentPage, MIN(visibleItemsCount, itemsCount));
-    NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
-    NSMutableArray *arr = [NSMutableArray array];
-    [set enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-        NSInteger realIndex = idx%itemsCount;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:realIndex inSection:0];
-        UICollectionViewLayoutAttributes *attr =
-        [self layoutAttributesForItemAtIndexPath:indexPath];
-        [arr addObject:attr];
-    }];
+    NSArray *arr = [self attributesInSection:0 range:range];
     return arr;
 }
 
@@ -62,8 +64,8 @@
     attributes.size = itemSize;
     CGFloat topCardMidX = contentOffset.x + collectionViewSize.width/2;
     attributes.center = CGPointMake(topCardMidX + spacing*visibleIndex, collectionViewSize.height/2);
-    CGFloat scale = [self scaleForVisibleIndex:visibleIndex offsetProgress:offsetProgress];
-    CGFloat step = [self stepForVisibleIndex:visibleIndex offsetProgress:offsetProgress];
+    CGFloat scale = [self p_scaleForVisibleIndex:visibleIndex offsetProgress:offsetProgress];
+    CGFloat step = [self p_stepForVisibleIndex:visibleIndex offsetProgress:offsetProgress];
     NSInteger level = ceil(scale*100);
     attributes.zIndex = 1000 + level;
     attributes.transform = CGAffineTransformMakeScale(scale, scale);
@@ -71,8 +73,10 @@
     return attributes;
 }
 
-- (CGFloat)scaleForVisibleIndex:(NSInteger)visibleIndex
-                 offsetProgress:(CGFloat)offsetProgress {
+#pragma mark - Privates
+
+- (CGFloat)p_scaleForVisibleIndex:(NSInteger)visibleIndex
+                   offsetProgress:(CGFloat)offsetProgress {
     CGFloat step = (1.0 - self.minScale)/self.half*1.0;
     if (visibleIndex > 0) {
         CGFloat scale = (1.0 - visibleIndex*step + step*offsetProgress);
@@ -86,11 +90,17 @@
     }
 }
 
-- (CGFloat)stepForVisibleIndex:(NSInteger)visibleIndex
-                offsetProgress:(CGFloat)offsetProgress {
+- (CGFloat)p_stepForVisibleIndex:(NSInteger)visibleIndex
+                  offsetProgress:(CGFloat)offsetProgress {
     CGFloat step = (1.0 - self.minScale)/self.half*1.0;
     CGFloat scale = (1.0 - visibleIndex*step + step*offsetProgress);
     return scale;
+}
+
+#pragma mark - Getters
+
+- (NSInteger)half {
+    return floor(self.visibleItemsCount/2.0);
 }
 
 //- (NSInteger)currentPage {
@@ -106,9 +116,5 @@
 //    }
 //    return MAX(0, index);
 //}
-
-- (NSInteger)half {
-    return floor(self.visibleItemsCount/2.0);
-}
 
 @end

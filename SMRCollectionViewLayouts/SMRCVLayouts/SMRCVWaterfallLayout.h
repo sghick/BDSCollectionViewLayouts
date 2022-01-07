@@ -5,7 +5,7 @@
 //  Created by Tinswin on 2021/12/30.
 //
 
-#import "SMRCVLayout.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface SMRCVWaterfallLayout : SMRCVLayout
+@interface SMRCVWaterfallLayout : UICollectionViewLayout
 
 @property (weak  , nonatomic) id<SMRCVWaterfallLayoutDelegate> delegate;
 

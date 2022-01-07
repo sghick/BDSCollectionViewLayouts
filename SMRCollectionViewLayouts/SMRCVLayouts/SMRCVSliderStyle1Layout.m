@@ -6,6 +6,7 @@
 //
 
 #import "SMRCVSliderStyle1Layout.h"
+#import "UICollectionViewLayout+SMR.h"
 
 @implementation SMRCVSliderStyle1Layout
 
@@ -17,6 +18,15 @@
     return self;
 }
 
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return YES;
+}
+
+- (CGSize)collectionViewContentSize {
+    return CGSizeMake(self.collectionViewSize.width * self.itemsCount,
+                      self.collectionViewSize.height);
+}
+
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     NSInteger itemsCount = self.itemsCount;
     NSInteger currentPage = self.currentPage;
@@ -26,14 +36,7 @@
     }
     
     NSRange range = NSMakeRange(currentPage, MIN(visibleItemsCount, itemsCount - currentPage));
-    NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
-    NSMutableArray *arr = [NSMutableArray array];
-    [set enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-        NSInteger realIndex = idx%itemsCount;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:realIndex inSection:0];
-        UICollectionViewLayoutAttributes *attr = [self layoutAttributesForItemAtIndexPath:indexPath];
-        [arr addObject:attr];
-    }];
+    NSArray *arr = [self attributesInSection:0 range:range];
     return arr;
 }
 
@@ -56,9 +59,9 @@
     attributes.center = CGPointMake(topCardMidX + spacing*visibleIndex, collectionViewSize.height/2);
     attributes.zIndex = 1000 - visibleIndex;
     CGFloat scale =
-    [self parallaxProgressForVisibleIndex:visibleIndex
-                           offsetProgress:offsetProgress
-                                 minScale:minScale];
+    [self p_scaleForVisibleIndex:visibleIndex
+                  offsetProgress:offsetProgress
+                        minScale:minScale];
     attributes.transform = CGAffineTransformMakeScale(scale, scale);
     if (visibleIndex == 0) {
         attributes.center = CGPointMake(attributes.center.x - offset, attributes.center.y);
@@ -68,9 +71,11 @@
     return attributes;
 }
 
-- (CGFloat)parallaxProgressForVisibleIndex:(NSInteger)visibleIndex
-                            offsetProgress:(CGFloat)offsetProgress
-                                  minScale:(CGFloat)minScale {
+#pragma mark - Privates
+
+- (CGFloat)p_scaleForVisibleIndex:(NSInteger)visibleIndex
+                   offsetProgress:(CGFloat)offsetProgress
+                         minScale:(CGFloat)minScale {
     CGFloat step = (1.0 - minScale)/(self.visibleItemsCount - 1)*1.0;
     return (1.0 - visibleIndex*step + step*offsetProgress);
 }

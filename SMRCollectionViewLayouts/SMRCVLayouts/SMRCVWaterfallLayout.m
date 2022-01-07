@@ -6,6 +6,7 @@
 //
 
 #import "SMRCVWaterfallLayout.h"
+#import "UICollectionViewLayout+SMR.h"
 
 @interface SMRCVWaterfallLayout ()
 
@@ -26,7 +27,11 @@
     for (NSInteger i = 0; i < self.columnCount; i++) {
         [self.columnHeights addObject:@(self.edgeInsets.top)];
     }
-    _attrs = [self loadAttributesInSection:0];
+    _attrs = [self attributesInSection:0];
+}
+
+- (CGSize)collectionViewContentSize {
+    return CGSizeMake(0, self.contentHeight + self.edgeInsets.bottom);
 }
 
 - (NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
@@ -71,10 +76,6 @@
         self.contentHeight = columnHeight;
     }
     return attrs;
-}
-
-- (CGSize)collectionViewContentSize {
-    return CGSizeMake(0, self.contentHeight + self.edgeInsets.bottom);
 }
 
 - (NSMutableArray *)columnHeights {

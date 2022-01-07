@@ -13,6 +13,9 @@
 		1D46368E2784359500B63594 /* SMRCVSliderStyle2LayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D46368D2784359500B63594 /* SMRCVSliderStyle2LayoutController.m */; };
 		1D46369127845C8700B63594 /* SMRCVSliderStyle3LayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D46369027845C8700B63594 /* SMRCVSliderStyle3LayoutController.m */; };
 		1D46369427845CA200B63594 /* SMRCVSliderStyle3Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D46369327845CA200B63594 /* SMRCVSliderStyle3Layout.m */; };
+		1D4636AE2787051F00B63594 /* SMRCVArtWallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4636AD2787051F00B63594 /* SMRCVArtWallLayout.m */; };
+		1D4636B1278705BB00B63594 /* SMRCVArtWallLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4636B0278705BB00B63594 /* SMRCVArtWallLayoutController.m */; };
+		1D4636B72787D9AF00B63594 /* UICollectionViewLayout+SMR.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4636B62787D9AF00B63594 /* UICollectionViewLayout+SMR.m */; };
 		1DC58ACC277D84F4002A796C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58ACB277D84F4002A796C /* AppDelegate.m */; };
 		1DC58ACF277D84F4002A796C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58ACE277D84F4002A796C /* SceneDelegate.m */; };
 		1DC58AD2277D84F4002A796C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58AD1277D84F4002A796C /* ViewController.m */; };
@@ -27,9 +30,6 @@
 		1DC58B09277DA4A0002A796C /* SMRCVSquareLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B08277DA4A0002A796C /* SMRCVSquareLayout.m */; };
 		1DC58B0C277DA75B002A796C /* SMRCVWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B0B277DA75B002A796C /* SMRCVWaterfallLayout.m */; };
 		1DC58B0F277DA77B002A796C /* SMRCVWaterfallLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B0E277DA77B002A796C /* SMRCVWaterfallLayoutController.m */; };
-		1DC58B15277ED6EC002A796C /* SMRCVSliderLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B14277ED6EC002A796C /* SMRCVSliderLayout.m */; };
-		1DC58B18277EDA15002A796C /* SMRCVSliderLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B17277EDA15002A796C /* SMRCVSliderLayoutController.m */; };
-		1DC58B1B2783E415002A796C /* SMRCVLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58B1A2783E415002A796C /* SMRCVLayout.m */; };
 		EB316A8DF222606FDCF4856B /* Pods_SMRCollectionViewLayouts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88664EBD45499D2579FFDA6C /* Pods_SMRCollectionViewLayouts.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +46,12 @@
 		1D46369027845C8700B63594 /* SMRCVSliderStyle3LayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderStyle3LayoutController.m; sourceTree = "<group>"; };
 		1D46369227845CA200B63594 /* SMRCVSliderStyle3Layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVSliderStyle3Layout.h; sourceTree = "<group>"; };
 		1D46369327845CA200B63594 /* SMRCVSliderStyle3Layout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderStyle3Layout.m; sourceTree = "<group>"; };
+		1D4636AC2787051F00B63594 /* SMRCVArtWallLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVArtWallLayout.h; sourceTree = "<group>"; };
+		1D4636AD2787051F00B63594 /* SMRCVArtWallLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVArtWallLayout.m; sourceTree = "<group>"; };
+		1D4636AF278705BB00B63594 /* SMRCVArtWallLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVArtWallLayoutController.h; sourceTree = "<group>"; };
+		1D4636B0278705BB00B63594 /* SMRCVArtWallLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVArtWallLayoutController.m; sourceTree = "<group>"; };
+		1D4636B52787D9AF00B63594 /* UICollectionViewLayout+SMR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewLayout+SMR.h"; sourceTree = "<group>"; };
+		1D4636B62787D9AF00B63594 /* UICollectionViewLayout+SMR.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewLayout+SMR.m"; sourceTree = "<group>"; };
 		1DC58AC7277D84F3002A796C /* SMRCollectionViewLayouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMRCollectionViewLayouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DC58ACA277D84F4002A796C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1DC58ACB277D84F4002A796C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -72,12 +78,6 @@
 		1DC58B0B277DA75B002A796C /* SMRCVWaterfallLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVWaterfallLayout.m; sourceTree = "<group>"; };
 		1DC58B0D277DA77B002A796C /* SMRCVWaterfallLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVWaterfallLayoutController.h; sourceTree = "<group>"; };
 		1DC58B0E277DA77B002A796C /* SMRCVWaterfallLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVWaterfallLayoutController.m; sourceTree = "<group>"; };
-		1DC58B13277ED6EC002A796C /* SMRCVSliderLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVSliderLayout.h; sourceTree = "<group>"; };
-		1DC58B14277ED6EC002A796C /* SMRCVSliderLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderLayout.m; sourceTree = "<group>"; };
-		1DC58B16277EDA15002A796C /* SMRCVSliderLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVSliderLayoutController.h; sourceTree = "<group>"; };
-		1DC58B17277EDA15002A796C /* SMRCVSliderLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVSliderLayoutController.m; sourceTree = "<group>"; };
-		1DC58B192783E415002A796C /* SMRCVLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVLayout.h; sourceTree = "<group>"; };
-		1DC58B1A2783E415002A796C /* SMRCVLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVLayout.m; sourceTree = "<group>"; };
 		3D3D495B2CD0E739FAC93A2F /* Pods-SMRCollectionViewLayouts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMRCollectionViewLayouts.debug.xcconfig"; path = "Target Support Files/Pods-SMRCollectionViewLayouts/Pods-SMRCollectionViewLayouts.debug.xcconfig"; sourceTree = "<group>"; };
 		88664EBD45499D2579FFDA6C /* Pods_SMRCollectionViewLayouts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SMRCollectionViewLayouts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A10F61B92EAB8F59E8E941 /* Pods-SMRCollectionViewLayouts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMRCollectionViewLayouts.release.xcconfig"; path = "Target Support Files/Pods-SMRCollectionViewLayouts/Pods-SMRCollectionViewLayouts.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,10 +136,6 @@
 		1DC58AE4277D88A1002A796C /* SMRCVLayouts */ = {
 			isa = PBXGroup;
 			children = (
-				1DC58B192783E415002A796C /* SMRCVLayout.h */,
-				1DC58B1A2783E415002A796C /* SMRCVLayout.m */,
-				1DC58B13277ED6EC002A796C /* SMRCVSliderLayout.h */,
-				1DC58B14277ED6EC002A796C /* SMRCVSliderLayout.m */,
 				1DC58AFB277D9D3E002A796C /* SMRCVCircleLayout.h */,
 				1DC58AFC277D9D3E002A796C /* SMRCVCircleLayout.m */,
 				1DC58B07277DA4A0002A796C /* SMRCVSquareLayout.h */,
@@ -152,6 +148,10 @@
 				1D463684278433B100B63594 /* SMRCVSliderStyle2Layout.m */,
 				1D46369227845CA200B63594 /* SMRCVSliderStyle3Layout.h */,
 				1D46369327845CA200B63594 /* SMRCVSliderStyle3Layout.m */,
+				1D4636AC2787051F00B63594 /* SMRCVArtWallLayout.h */,
+				1D4636AD2787051F00B63594 /* SMRCVArtWallLayout.m */,
+				1D4636B52787D9AF00B63594 /* UICollectionViewLayout+SMR.h */,
+				1D4636B62787D9AF00B63594 /* UICollectionViewLayout+SMR.m */,
 			);
 			name = SMRCVLayouts;
 			path = SMRCollectionViewLayouts/SMRCVLayouts;
@@ -162,8 +162,6 @@
 			children = (
 				1DC58AF8277D9A50002A796C /* SMRCVLayoutController.h */,
 				1DC58AF9277D9A50002A796C /* SMRCVLayoutController.m */,
-				1DC58B16277EDA15002A796C /* SMRCVSliderLayoutController.h */,
-				1DC58B17277EDA15002A796C /* SMRCVSliderLayoutController.m */,
 				1DC58AFE277D9D52002A796C /* SMRCVCircleLayoutController.h */,
 				1DC58AFF277D9D52002A796C /* SMRCVCircleLayoutController.m */,
 				1DC58B04277DA452002A796C /* SMRCVSquareLayoutController.h */,
@@ -176,6 +174,8 @@
 				1D46368D2784359500B63594 /* SMRCVSliderStyle2LayoutController.m */,
 				1D46368F27845C8700B63594 /* SMRCVSliderStyle3LayoutController.h */,
 				1D46369027845C8700B63594 /* SMRCVSliderStyle3LayoutController.m */,
+				1D4636AF278705BB00B63594 /* SMRCVArtWallLayoutController.h */,
+				1D4636B0278705BB00B63594 /* SMRCVArtWallLayoutController.m */,
 			);
 			path = SMRCVDemos;
 			sourceTree = "<group>";
@@ -314,16 +314,16 @@
 				1DC58B00277D9D52002A796C /* SMRCVCircleLayoutController.m in Sources */,
 				1D463688278433BE00B63594 /* SMRCVSliderStyle1Layout.m in Sources */,
 				1D46368E2784359500B63594 /* SMRCVSliderStyle2LayoutController.m in Sources */,
-				1DC58B1B2783E415002A796C /* SMRCVLayout.m in Sources */,
 				1D46369427845CA200B63594 /* SMRCVSliderStyle3Layout.m in Sources */,
 				1D46368B2784358900B63594 /* SMRCVSliderStyle1LayoutController.m in Sources */,
 				1DC58AD2277D84F4002A796C /* ViewController.m in Sources */,
-				1DC58B15277ED6EC002A796C /* SMRCVSliderLayout.m in Sources */,
-				1DC58B18277EDA15002A796C /* SMRCVSliderLayoutController.m in Sources */,
+				1D4636B1278705BB00B63594 /* SMRCVArtWallLayoutController.m in Sources */,
 				1DC58AFD277D9D3E002A796C /* SMRCVCircleLayout.m in Sources */,
 				1DC58ACC277D84F4002A796C /* AppDelegate.m in Sources */,
 				1DC58B06277DA452002A796C /* SMRCVSquareLayoutController.m in Sources */,
+				1D4636B72787D9AF00B63594 /* UICollectionViewLayout+SMR.m in Sources */,
 				1DC58ADD277D84F7002A796C /* main.m in Sources */,
+				1D4636AE2787051F00B63594 /* SMRCVArtWallLayout.m in Sources */,
 				1D46369127845C8700B63594 /* SMRCVSliderStyle3LayoutController.m in Sources */,
 				1DC58B09277DA4A0002A796C /* SMRCVSquareLayout.m in Sources */,
 				1DC58B0F277DA77B002A796C /* SMRCVWaterfallLayoutController.m in Sources */,
