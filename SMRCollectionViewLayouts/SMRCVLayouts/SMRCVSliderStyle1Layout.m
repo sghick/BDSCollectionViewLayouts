@@ -49,6 +49,7 @@
     CGFloat minScale = self.minScale;
     CGSize collectionViewSize = self.collectionViewSize;
     CGSize itemSize = self.itemSize;
+    CGPoint itemOffset = self.itemOffset;
     
     UICollectionViewLayoutAttributes *attributes =
     [[super layoutAttributesForItemAtIndexPath:indexPath] copy];
@@ -56,7 +57,7 @@
     NSInteger visibleIndex = MAX(indexPath.item - currentPage, 0);
     attributes.size = itemSize;
     CGFloat topCardMidX = contentOffset.x + collectionViewSize.width/2;
-    attributes.center = CGPointMake(topCardMidX + spacing*visibleIndex, collectionViewSize.height/2);
+    attributes.center = CGPointMake(topCardMidX + spacing*visibleIndex + itemOffset.x, collectionViewSize.height/2 + itemOffset.y);
     attributes.zIndex = 1000 - visibleIndex;
     CGFloat scale =
     [self p_scaleForVisibleIndex:visibleIndex

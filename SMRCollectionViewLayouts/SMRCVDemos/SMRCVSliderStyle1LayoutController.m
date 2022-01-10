@@ -26,10 +26,11 @@
 - (UICollectionViewLayout *)collectionViewLayout {
     SMRCVSliderStyle1Layout *layout = [[SMRCVSliderStyle1Layout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.itemSize = CGSizeMake(300, 200);
-    layout.visibleItemsCount = 4;
-    layout.spacing = 10;
-    layout.minScale = 0.8;
+    layout.itemSize = CGSizeMake(340, 260);
+    layout.visibleItemsCount = 3;
+    layout.spacing = 20;
+    layout.minScale = 0.7;
+    layout.itemOffset = CGPointMake(-20, 0);
     return layout;
 }
 

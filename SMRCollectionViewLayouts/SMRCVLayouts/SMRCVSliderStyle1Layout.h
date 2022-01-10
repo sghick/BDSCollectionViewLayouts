@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSInteger visibleItemsCount;
 @property (assign, nonatomic) CGFloat minScale;
 @property (assign, nonatomic) CGFloat spacing;
+@property (assign, nonatomic) CGPoint itemOffset;
 
 @end
 
