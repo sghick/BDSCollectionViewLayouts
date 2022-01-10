@@ -12,6 +12,7 @@
 SMRCVArtWallLayoutDelegate>
 
 @property (strong, nonatomic) NSArray<NSValue *> *sizes;
+@property (strong, nonatomic) NSArray<NSValue *> *offsets;
 
 @end
 
@@ -28,13 +29,19 @@ SMRCVArtWallLayoutDelegate>
         @(CGSizeMake(70, 80)),
         @(CGSizeMake(180, 150)),
         @(CGSizeMake(100, 90)),
-        @(CGSizeMake(110, 60)),
-        @(CGSizeMake(30, 30)),
-        @(CGSizeMake(70, 70)),
-        @(CGSizeMake(170, 170)),
-        @(CGSizeMake(130, 120)),
-        @(CGSizeMake(160, 100)),
-        @(CGSizeMake(45, 65)),
+//        @(CGSizeMake(110, 60)),
+//        @(CGSizeMake(30, 30)),
+//        @(CGSizeMake(70, 70)),
+//        @(CGSizeMake(170, 170)),
+//        @(CGSizeMake(130, 120)),
+//        @(CGSizeMake(160, 100)),
+//        @(CGSizeMake(45, 65)),
+    ];
+    self.offsets = @[
+        @(CGPointMake(0, -50)),
+        @(CGPointMake(-80, 40)),
+        @(CGPointMake(10, -30)),
+        @(CGPointMake(-30, 70)),
     ];
 }
 
@@ -45,10 +52,16 @@ SMRCVArtWallLayoutDelegate>
     return self.sizes[idx].CGSizeValue;
 }
 
+- (CGPoint)artWallLayout:(SMRCVArtWallLayout *)layout offsetForItemAtIndex:(NSUInteger)index {
+    NSInteger idx = index%self.offsets.count;
+    return self.offsets[idx].CGPointValue;
+}
+
 #pragma mark - Getters
 
 - (UICollectionViewLayout *)collectionViewLayout {
     SMRCVArtWallLayout *layout = [[SMRCVArtWallLayout alloc] init];
+    layout.edgeInsets = UIEdgeInsetsMake(20, 20, 20, 20);
     layout.visibleItemsCount = 5;
     layout.minScale = 0.5;
     layout.delegate = self;

@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak  , nonatomic) id<SMRCVArtWallLayoutDelegate> delegate;
 
+@property (assign, nonatomic) UIEdgeInsets edgeInsets;
 @property (assign, nonatomic) NSInteger visibleItemsCount;
 @property (assign, nonatomic) CGFloat minScale;
 

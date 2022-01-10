@@ -14,6 +14,8 @@
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, UICollectionViewLayoutAttributes *> *cache;
 @property (strong, nonatomic) NSArray<UICollectionViewLayoutAttributes *> *attrs;
 
+@property (assign, nonatomic) CGFloat p_maxWidth;
+
 @end
 
 @implementation SMRCVArtWallLayout
@@ -22,7 +24,7 @@
     [super prepareLayout];
     self.attrs = [self attributesInSection:0];
     UICollectionViewLayoutAttributes *last = self.attrs.lastObject;
-    self.contentWidth = CGRectGetMaxX(last.frame);
+    self.contentWidth = CGRectGetMaxX(last.frame) + self.edgeInsets.right;
 }
 
 - (CGSize)collectionViewContentSize {
@@ -43,6 +45,12 @@
         CGFloat centerY = self.contentOffset.y + self.collectionViewSize.height/2;
         if ([self.delegate respondsToSelector:@selector(artWallLayout:sizeForItemAtIndex:)]) {
             frame.size = [self.delegate artWallLayout:self sizeForItemAtIndex:indexPath.item];
+        }
+        
+        if (!last) {
+            self.p_maxWidth = 0;
+            frame.origin.x = self.edgeInsets.left;
+        } else {
             frame.origin.x = CGRectGetMaxX(last.frame);
         }
         
@@ -55,6 +63,9 @@
         
         attrs.frame = frame;
         attrs.center = CGPointMake(attrs.center.x + offset.x, centerY + offset.y);
+        
+        self.p_maxWidth = MAX(self.p_maxWidth, CGRectGetMaxX(attrs.frame));
+        
         self.cache[@(indexPath.item)] = attrs;
     }
     return attrs;
