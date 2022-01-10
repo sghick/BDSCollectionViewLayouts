@@ -26,7 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGFloat lineSpacing;
 @property (assign, nonatomic) CGFloat interitemSpacing;
 
+/** 默认0,不限制 */
 @property (assign, nonatomic) NSInteger maxWidth;
+/** 默认0,不限制 */
 @property (assign, nonatomic) NSInteger numberOfLines;
 
 @end

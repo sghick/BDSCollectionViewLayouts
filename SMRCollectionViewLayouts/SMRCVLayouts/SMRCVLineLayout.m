@@ -64,7 +64,7 @@
         
         // 判断是否需要折行
         CGFloat preMaxX = CGRectGetMaxX(frame) + self.edgeInsets.right;
-        if (preMaxX > self.maxWidth) {
+        if ((self.maxWidth > 0) && (preMaxX > self.maxWidth)) {
             frame.origin.x = self.edgeInsets.left;
             frame.origin.y += self.p_lineMaxHeight + self.interitemSpacing;
             self.p_lineMaxHeight = frame.size.height;
