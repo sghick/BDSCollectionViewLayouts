@@ -18,6 +18,8 @@
 		1D4636B72787D9AF00B63594 /* UICollectionViewLayout+SMR.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4636B62787D9AF00B63594 /* UICollectionViewLayout+SMR.m */; };
 		1D4636BD278835D900B63594 /* SMRCVLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4636BC278835D900B63594 /* SMRCVLineLayout.m */; };
 		1D4636C02788360F00B63594 /* SMRCVLineLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4636BF2788360F00B63594 /* SMRCVLineLayoutController.m */; };
+		1D4636C6278C003600B63594 /* SMRCVAverageLayoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4636C5278C003600B63594 /* SMRCVAverageLayoutController.m */; };
+		1D4636C9278C008500B63594 /* SMRCVAverageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4636C8278C008500B63594 /* SMRCVAverageLayout.m */; };
 		1DC58ACC277D84F4002A796C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58ACB277D84F4002A796C /* AppDelegate.m */; };
 		1DC58ACF277D84F4002A796C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58ACE277D84F4002A796C /* SceneDelegate.m */; };
 		1DC58AD2277D84F4002A796C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DC58AD1277D84F4002A796C /* ViewController.m */; };
@@ -58,6 +60,10 @@
 		1D4636BC278835D900B63594 /* SMRCVLineLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVLineLayout.m; sourceTree = "<group>"; };
 		1D4636BE2788360F00B63594 /* SMRCVLineLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVLineLayoutController.h; sourceTree = "<group>"; };
 		1D4636BF2788360F00B63594 /* SMRCVLineLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVLineLayoutController.m; sourceTree = "<group>"; };
+		1D4636C4278C003600B63594 /* SMRCVAverageLayoutController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVAverageLayoutController.h; sourceTree = "<group>"; };
+		1D4636C5278C003600B63594 /* SMRCVAverageLayoutController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVAverageLayoutController.m; sourceTree = "<group>"; };
+		1D4636C7278C008500B63594 /* SMRCVAverageLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMRCVAverageLayout.h; sourceTree = "<group>"; };
+		1D4636C8278C008500B63594 /* SMRCVAverageLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMRCVAverageLayout.m; sourceTree = "<group>"; };
 		1DC58AC7277D84F3002A796C /* SMRCollectionViewLayouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMRCollectionViewLayouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DC58ACA277D84F4002A796C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1DC58ACB277D84F4002A796C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -158,6 +164,8 @@
 				1D46369327845CA200B63594 /* SMRCVSliderStyle3Layout.m */,
 				1D4636BB278835D900B63594 /* SMRCVLineLayout.h */,
 				1D4636BC278835D900B63594 /* SMRCVLineLayout.m */,
+				1D4636C7278C008500B63594 /* SMRCVAverageLayout.h */,
+				1D4636C8278C008500B63594 /* SMRCVAverageLayout.m */,
 				1D4636B52787D9AF00B63594 /* UICollectionViewLayout+SMR.h */,
 				1D4636B62787D9AF00B63594 /* UICollectionViewLayout+SMR.m */,
 			);
@@ -186,6 +194,8 @@
 				1D46369027845C8700B63594 /* SMRCVSliderStyle3LayoutController.m */,
 				1D4636BE2788360F00B63594 /* SMRCVLineLayoutController.h */,
 				1D4636BF2788360F00B63594 /* SMRCVLineLayoutController.m */,
+				1D4636C4278C003600B63594 /* SMRCVAverageLayoutController.h */,
+				1D4636C5278C003600B63594 /* SMRCVAverageLayoutController.m */,
 			);
 			path = SMRCVDemos;
 			sourceTree = "<group>";
@@ -328,6 +338,7 @@
 				1D46369427845CA200B63594 /* SMRCVSliderStyle3Layout.m in Sources */,
 				1D46368B2784358900B63594 /* SMRCVSliderStyle1LayoutController.m in Sources */,
 				1DC58AD2277D84F4002A796C /* ViewController.m in Sources */,
+				1D4636C9278C008500B63594 /* SMRCVAverageLayout.m in Sources */,
 				1D4636B1278705BB00B63594 /* SMRCVArtWallLayoutController.m in Sources */,
 				1DC58AFD277D9D3E002A796C /* SMRCVCircleLayout.m in Sources */,
 				1DC58ACC277D84F4002A796C /* AppDelegate.m in Sources */,
@@ -338,6 +349,7 @@
 				1D4636AE2787051F00B63594 /* SMRCVArtWallLayout.m in Sources */,
 				1D46369127845C8700B63594 /* SMRCVSliderStyle3LayoutController.m in Sources */,
 				1DC58B09277DA4A0002A796C /* SMRCVSquareLayout.m in Sources */,
+				1D4636C6278C003600B63594 /* SMRCVAverageLayoutController.m in Sources */,
 				1DC58B0F277DA77B002A796C /* SMRCVWaterfallLayoutController.m in Sources */,
 				1DC58B0C277DA75B002A796C /* SMRCVWaterfallLayout.m in Sources */,
 				1DC58AFA277D9A50002A796C /* SMRCVLayoutController.m in Sources */,

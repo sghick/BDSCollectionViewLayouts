@@ -27,7 +27,7 @@ SMRCVLineLayoutDelegate>
     layout.edgeInsets = UIEdgeInsetsMake(20, 20, 20, 20);
     layout.lineSpacing = 10;
     layout.interitemSpacing = 20;
-//    layout.maxWidth = [UIScreen mainScreen].bounds.size.width;
+    layout.maxWidth = [UIScreen mainScreen].bounds.size.width;
     layout.numberOfLines = 5;
     return layout;
 }
