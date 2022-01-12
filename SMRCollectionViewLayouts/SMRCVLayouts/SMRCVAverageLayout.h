@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 /** 返回item的size */
-- (CGSize)lineLayout:(SMRCVAverageLayout *)layout sizeForItemAtIndex:(NSUInteger)index;
+- (CGSize)averageLayout:(SMRCVAverageLayout *)layout sizeForItemAtIndex:(NSUInteger)index;
 
 @end
 

@@ -13,6 +13,7 @@
 @property (assign, nonatomic) CGFloat contentWidth;
 @property (assign, nonatomic) CGFloat contentHeight;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber *, UICollectionViewLayoutAttributes *> *cache;
+@property (strong, nonatomic) NSMutableIndexSet *cachedIndexset;
 @property (strong, nonatomic) NSArray<UICollectionViewLayoutAttributes *> *attrs;
 
 @property (assign, nonatomic) CGFloat p_maxWidth;       // 最大宽,临时变量
@@ -59,8 +60,8 @@
         attris = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
         
         CGRect frame = attris.frame;
-        if ([self.delegate respondsToSelector:@selector(lineLayout:sizeForItemAtIndex:)]) {
-            frame.size = [self.delegate lineLayout:self sizeForItemAtIndex:indexPath.item];
+        if ([self.delegate respondsToSelector:@selector(averageLayout:sizeForItemAtIndex:)]) {
+            frame.size = [self.delegate averageLayout:self sizeForItemAtIndex:indexPath.item];
             frame.origin.x = CGRectGetMaxX(last.frame);
         }
         
@@ -83,7 +84,7 @@
 
 - (void)p_layoutAverageAttributesForItemAtIndex:(NSInteger)index maxWidth:(CGFloat)maxWidth lineMaxCount:(NSInteger)lineMaxCount {
     UICollectionViewLayoutAttributes *attris = self.cache[@(index)];
-    if (attris) {
+    if (attris && ![self.cachedIndexset containsIndex:index]) {
         UICollectionViewLayoutAttributes *last = self.cache[@(index - 1)];
         
         CGRect frame = attris.frame;
@@ -110,6 +111,8 @@
         
         self.p_maxWidth = MAX(self.p_maxWidth, CGRectGetMaxX(frame));
         attris.frame = frame;
+        
+        [self.cachedIndexset addIndex:index];
     }
 }
 
@@ -120,6 +123,13 @@
         _cache = [NSMutableDictionary dictionary];
     }
     return _cache;
+}
+
+- (NSMutableIndexSet *)cachedIndexset {
+    if (!_cachedIndexset) {
+        _cachedIndexset = [NSMutableIndexSet indexSet];
+    }
+    return _cachedIndexset;
 }
 
 @end

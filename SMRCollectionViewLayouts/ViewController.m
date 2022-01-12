@@ -52,6 +52,7 @@ UITableViewDelegate>
         [DemoItem itemWithName:@"滑动3" cls:@"SMRCVSliderStyle3LayoutController"],
         [DemoItem itemWithName:@"线形" cls:@"SMRCVLineLayoutController"],
         [DemoItem itemWithName:@"平均线形" cls:@"SMRCVAverageLayoutController"],
+        [DemoItem itemWithName:@"弧线滑动" cls:@"SMRCVSliderArcLayoutController"],
     ];
     [self.view addSubview:self.tableView];
 }
