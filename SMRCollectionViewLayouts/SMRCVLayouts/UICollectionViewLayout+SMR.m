@@ -12,18 +12,33 @@
 #pragma mark - Utils
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)attributesInSection:(NSInteger)section {
-    return [self attributesInSection:section range:NSMakeRange(0, self.itemsCount)];
+    return [self attributesInSection:section cache:nil];
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)attributesInSection:(NSInteger)section
                                                                range:(NSRange)range {
+    return [self attributesInSection:section range:range cache:nil];
+}
+
+- (NSArray<UICollectionViewLayoutAttributes *> *)attributesInSection:(NSInteger)section cache:(NSMutableDictionary *)cache {
+    return [self attributesInSection:section range:NSMakeRange(0, self.itemsCount) cache:cache];
+}
+- (NSArray<UICollectionViewLayoutAttributes *> *)attributesInSection:(NSInteger)section range:(NSRange)range cache:(NSMutableDictionary *)cache {
+    if (!cache) {
+        cache = [NSMutableDictionary dictionary];
+    }
     NSMutableArray *arr = [NSMutableArray array];
     for (NSInteger i = range.location; i < (range.location + range.length); i++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
-        UICollectionViewLayoutAttributes *attr = [self layoutAttributesForItemAtIndexPath:indexPath];
+        UICollectionViewLayoutAttributes *attr =
+        [self layoutAttributesForItemAtIndexPath:indexPath cache:cache];
         attr ? [arr addObject:attr] : NULL;
     }
     return [arr copy];
+}
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath cache:(NSMutableDictionary *)cache {
+    return [self layoutAttributesForItemAtIndexPath:indexPath];
 }
 
 #pragma mark - Getters

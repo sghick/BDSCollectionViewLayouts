@@ -11,7 +11,6 @@
 @interface SMRCVSliderArcLayout ()
 
 @property (assign, nonatomic) CGFloat contentWidth;
-@property (strong, nonatomic) NSMutableDictionary<NSNumber *, UICollectionViewLayoutAttributes *> *cache;
 @property (strong, nonatomic) NSArray<UICollectionViewLayoutAttributes *> *attrs;
 
 @end
@@ -36,10 +35,10 @@
     return self.attrs;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *attris = self.cache[@(indexPath.item)];
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath cache:(nonnull NSMutableDictionary *)cache {
+    UICollectionViewLayoutAttributes *attris = cache[@(indexPath.item)];
     if (!attris) {
-        UICollectionViewLayoutAttributes *last = self.cache[@(indexPath.item - 1)];
+        UICollectionViewLayoutAttributes *last = cache[@(indexPath.item - 1)];
         attris = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
         
         CGRect frame = attris.frame;
@@ -53,18 +52,9 @@
         
         attris.frame = frame;
         attris.center = CGPointMake(attris.center.x, centerY);
-        self.cache[@(indexPath.item)] = attris;
+        cache[@(indexPath.item)] = attris;
     }
     return attris;
-}
-
-#pragma mark - Getters
-
-- (NSMutableDictionary<NSNumber *,UICollectionViewLayoutAttributes *> *)cache {
-    if (!_cache) {
-        _cache = [NSMutableDictionary dictionary];
-    }
-    return _cache;
 }
 
 @end

@@ -70,7 +70,7 @@ UITableViewDelegate>
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DemoItem *item = self.datas[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.textLabel.text = item.name;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@  %@", item.name, item.cls];
     return cell;
 }
 

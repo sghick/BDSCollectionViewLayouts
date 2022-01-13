@@ -11,7 +11,6 @@
 @interface SMRCVArtWallLayout ()
 
 @property (assign, nonatomic) CGFloat contentWidth;
-@property (strong, nonatomic) NSMutableDictionary<NSNumber *, UICollectionViewLayoutAttributes *> *cache;
 @property (strong, nonatomic) NSArray<UICollectionViewLayoutAttributes *> *attrs;
 
 @property (assign, nonatomic) CGFloat p_maxWidth;
@@ -22,7 +21,6 @@
 
 - (void)prepareLayout {
     [super prepareLayout];
-    self.cache = nil;
     self.p_maxWidth = 0;
     self.attrs = [self attributesInSection:0];
     UICollectionViewLayoutAttributes *last = self.attrs.lastObject;
@@ -37,10 +35,10 @@
     return self.attrs;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *attrs = self.cache[@(indexPath.item)];
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath cache:(nonnull NSMutableDictionary *)cache {
+    UICollectionViewLayoutAttributes *attrs = cache[@(indexPath.item)];
     if (!attrs) {
-        UICollectionViewLayoutAttributes *last = self.cache[@(indexPath.item - 1)];
+        UICollectionViewLayoutAttributes *last = cache[@(indexPath.item - 1)];
         attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
         
         CGRect frame = attrs.frame;
@@ -68,16 +66,12 @@
         
         self.p_maxWidth = MAX(self.p_maxWidth, CGRectGetMaxX(attrs.frame));
         
-        self.cache[@(indexPath.item)] = attrs;
+        cache[@(indexPath.item)] = attrs;
     }
     return attrs;
 }
 
 #pragma mark - Utils
-
-- (UICollectionViewLayoutAttributes *)attributeAtIndex:(NSInteger)index {
-    return self.cache[@(index)];
-}
 
 - (CGPoint)offsetWithSeedAttr:(UICollectionViewLayoutAttributes *)seedAttr {
     if (!seedAttr) return CGPointZero;
@@ -95,15 +89,6 @@
         return 0;
     }
     return seed%(2*within) - within;
-}
-
-#pragma mark - Getters
-
-- (NSMutableDictionary<NSNumber *,UICollectionViewLayoutAttributes *> *)cache {
-    if (!_cache) {
-        _cache = [NSMutableDictionary dictionary];
-    }
-    return _cache;
 }
 
 @end

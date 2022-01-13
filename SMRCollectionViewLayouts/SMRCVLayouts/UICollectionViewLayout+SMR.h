@@ -17,8 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly) NSInteger currentPage;
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)attributesInSection:(NSInteger)section;
-- (NSArray<UICollectionViewLayoutAttributes *> *)attributesInSection:(NSInteger)section
-                                                               range:(NSRange)range;
+- (NSArray<UICollectionViewLayoutAttributes *> *)attributesInSection:(NSInteger)section range:(NSRange)range;
+
+- (NSArray<UICollectionViewLayoutAttributes *> *)attributesInSection:(NSInteger)section cache:(nullable NSMutableDictionary *)cache;
+- (NSArray<UICollectionViewLayoutAttributes *> *)attributesInSection:(NSInteger)section range:(NSRange)range cache:(nullable NSMutableDictionary *)cache;
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath cache:(nonnull NSMutableDictionary *)cache;
 
 @end
 

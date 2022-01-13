@@ -30,8 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSInteger visibleItemsCount;
 @property (assign, nonatomic) CGFloat minScale;
 
-/** 仅当加载过才会返回对应实例 */
-- (nullable UICollectionViewLayoutAttributes *)attributeAtIndex:(NSInteger)index;
 /** 返回一个艺术墙的随机偏移量 */
 - (CGPoint)offsetWithSeedAttr:(UICollectionViewLayoutAttributes *)seedAttr;
 

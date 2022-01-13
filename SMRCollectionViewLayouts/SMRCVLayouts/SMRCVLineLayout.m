@@ -12,7 +12,6 @@
 
 @property (assign, nonatomic) CGFloat contentWidth;
 @property (assign, nonatomic) CGFloat contentHeight;
-@property (strong, nonatomic) NSMutableDictionary<NSNumber *, UICollectionViewLayoutAttributes *> *cache;
 @property (strong, nonatomic) NSArray<UICollectionViewLayoutAttributes *> *attrs;
 
 @property (assign, nonatomic) CGFloat p_numberOfLine;   // 当前最大行数,临时变量
@@ -26,7 +25,6 @@
     [super prepareLayout];
     self.p_numberOfLine = 0;
     self.p_lineMaxHeight = 0;
-    self.cache = nil;
     self.attrs = [self attributesInSection:0];
     UICollectionViewLayoutAttributes *last = self.attrs.lastObject;
     self.contentWidth = CGRectGetMaxX(last.frame) + self.edgeInsets.right;
@@ -41,10 +39,10 @@
     return self.attrs;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *attris = self.cache[@(indexPath.item)];
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath cache:(nonnull NSMutableDictionary *)cache {
+    UICollectionViewLayoutAttributes *attris = cache[@(indexPath.item)];
     if (!attris) {
-        UICollectionViewLayoutAttributes *last = self.cache[@(indexPath.item - 1)];
+        UICollectionViewLayoutAttributes *last = cache[@(indexPath.item - 1)];
         attris = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
         
         CGRect frame = attris.frame;
@@ -75,7 +73,7 @@
         }
         
         attris.frame = frame;
-        self.cache[@(indexPath.item)] = attris;
+        cache[@(indexPath.item)] = attris;
     }
     
     // 判断是否超出行限制
@@ -83,15 +81,6 @@
         return nil;
     }
     return attris;
-}
-
-#pragma mark - Getters
-
-- (NSMutableDictionary<NSNumber *,UICollectionViewLayoutAttributes *> *)cache {
-    if (!_cache) {
-        _cache = [NSMutableDictionary dictionary];
-    }
-    return _cache;
 }
 
 @end
