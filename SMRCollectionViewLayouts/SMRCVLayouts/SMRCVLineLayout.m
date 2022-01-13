@@ -46,8 +46,8 @@
         attris = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
         
         CGRect frame = attris.frame;
-        if ([self.delegate respondsToSelector:@selector(lineLayout:sizeForItemAtIndex:)]) {
-            frame.size = [self.delegate lineLayout:self sizeForItemAtIndex:indexPath.item];
+        if ([self.delegate respondsToSelector:@selector(layout:sizeForItemAtIndex:)]) {
+            frame.size = [self.delegate layout:self sizeForItemAtIndex:indexPath.item];
             frame.origin.x = CGRectGetMaxX(last.frame);
         }
         

@@ -47,12 +47,12 @@ SMRCVArtWallLayoutDelegate>
 
 #pragma mark - SMRCVArtWallLayoutDelegate
 
-- (CGSize)artWallLayout:(SMRCVArtWallLayout *)layout sizeForItemAtIndex:(NSUInteger)index {
+- (CGSize)layout:(SMRCVArtWallLayout *)layout sizeForItemAtIndex:(NSUInteger)index {
     NSInteger idx = index%self.sizes.count;
     return self.sizes[idx].CGSizeValue;
 }
 
-- (CGPoint)artWallLayout:(SMRCVArtWallLayout *)layout offsetForItemAtIndex:(NSUInteger)index {
+- (CGPoint)layout:(SMRCVArtWallLayout *)layout offsetForItemAtIndex:(NSUInteger)index {
     NSInteger idx = index%self.offsets.count;
     return self.offsets[idx].CGPointValue;
 }

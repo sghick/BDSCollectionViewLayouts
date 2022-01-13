@@ -43,8 +43,8 @@
         
         CGRect frame = attrs.frame;
         CGFloat centerY = self.contentOffset.y + self.collectionViewSize.height/2;
-        if ([self.delegate respondsToSelector:@selector(artWallLayout:sizeForItemAtIndex:)]) {
-            frame.size = [self.delegate artWallLayout:self sizeForItemAtIndex:indexPath.item];
+        if ([self.delegate respondsToSelector:@selector(layout:sizeForItemAtIndex:)]) {
+            frame.size = [self.delegate layout:self sizeForItemAtIndex:indexPath.item];
         }
         
         if (!last) {
@@ -55,8 +55,8 @@
         }
         
         CGPoint offset = CGPointZero;
-        if ([self.delegate respondsToSelector:@selector(artWallLayout:offsetForItemAtIndex:)]) {
-            offset = [self.delegate artWallLayout:self offsetForItemAtIndex:indexPath.item];
+        if ([self.delegate respondsToSelector:@selector(layout:offsetForItemAtIndex:)]) {
+            offset = [self.delegate layout:self offsetForItemAtIndex:indexPath.item];
         } else {
             offset = [self offsetWithSeedAttr:last ?: attrs];
         }

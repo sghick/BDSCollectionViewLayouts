@@ -45,7 +45,7 @@
     
     // 设置布局属性的frame
     CGFloat w = (collectionViewW - self.edgeInsets.left - self.edgeInsets.right - (self.columnCount - 1) * self.interitemSpacing) / self.columnCount;
-    CGFloat h = [self.delegate waterfallLayout:self heightForItemAtIndex:indexPath.item itemWidth:w];
+    CGFloat h = [self.delegate layout:self heightForItemAtIndex:indexPath.item itemWidth:w];
     // 找出高度最短的那一列
     //找出来最短后 就把下一个cell 添加到低下
     NSInteger destColumn = 0;

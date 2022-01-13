@@ -21,6 +21,11 @@
 
 - (UICollectionViewLayout *)collectionViewLayout {
     SMRCVSquareLayout *viewLayout = [[SMRCVSquareLayout alloc] init];
+    viewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    viewLayout.moduleSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, 100);
+    viewLayout.edgeInsets = UIEdgeInsetsMake(20, 20, 20, 20);
+    viewLayout.interitemSpacing = 10;
+    viewLayout.lineSpacing = 10;
     return viewLayout;
 }
 

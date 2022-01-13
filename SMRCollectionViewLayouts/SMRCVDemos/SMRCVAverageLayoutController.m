@@ -22,7 +22,7 @@ SMRCVAverageLayoutDelegate>
 
 #pragma mark - SMRCVLineLayoutDelegate
 
-- (CGSize)averageLayout:(SMRCVAverageLayout *)layout sizeForItemAtIndex:(NSUInteger)index {
+- (CGSize)layout:(SMRCVAverageLayout *)layout sizeForItemAtIndex:(NSUInteger)index {
     return CGSizeMake(arc4random()%150 + 30, 50);
 }
 

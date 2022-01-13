@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 /** 返回item的size */
-- (CGSize)artWallLayout:(SMRCVArtWallLayout *)layout sizeForItemAtIndex:(NSUInteger)index;
+- (CGSize)layout:(SMRCVArtWallLayout *)layout sizeForItemAtIndex:(NSUInteger)index;
 
 @optional
 /** 返回item上下左右偏移量 */
-- (CGPoint)artWallLayout:(SMRCVArtWallLayout *)layout offsetForItemAtIndex:(NSUInteger)index;
+- (CGPoint)layout:(SMRCVArtWallLayout *)layout offsetForItemAtIndex:(NSUInteger)index;
 
 @end
 
