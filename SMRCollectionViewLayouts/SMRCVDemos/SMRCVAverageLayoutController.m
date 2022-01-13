@@ -15,6 +15,11 @@ SMRCVAverageLayoutDelegate>
 
 @implementation SMRCVAverageLayoutController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.collectionViewHeight = 200;
+}
+
 #pragma mark - SMRCVLineLayoutDelegate
 
 - (CGSize)averageLayout:(SMRCVAverageLayout *)layout sizeForItemAtIndex:(NSUInteger)index {

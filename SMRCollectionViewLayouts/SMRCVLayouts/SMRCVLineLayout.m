@@ -24,6 +24,9 @@
 
 - (void)prepareLayout {
     [super prepareLayout];
+    self.p_numberOfLine = 0;
+    self.p_lineMaxHeight = 0;
+    self.cache = nil;
     self.attrs = [self attributesInSection:0];
     UICollectionViewLayoutAttributes *last = self.attrs.lastObject;
     self.contentWidth = CGRectGetMaxX(last.frame) + self.edgeInsets.right;

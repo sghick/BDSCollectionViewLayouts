@@ -21,9 +21,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:self.collectionView];
     self.dataSource = [@"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z" componentsSeparatedByString:@" "];
+    [self.collectionView reloadData];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.collectionView reloadData];
 }
 
@@ -67,6 +71,15 @@
     return viewLayout;
 }
 
+#pragma mark - Setters
+
+- (void)setCollectionViewHeight:(CGFloat)collectionViewHeight {
+    _collectionViewHeight = collectionViewHeight;
+    CGRect frame = self.collectionView.frame;
+    frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, collectionViewHeight);
+    self.collectionView.frame = frame;
+}
+
 #pragma mark - Getters
 
 - (UICollectionViewLayout *)viewLayout {
@@ -78,8 +91,12 @@
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
+        CGFloat y = 64 + 33;
+        CGSize size = [UIScreen mainScreen].bounds.size;
+        CGFloat bottom = 200;
+        CGRect frame = CGRectMake(0, y, size.width, size.height - y - bottom);
         _collectionView =
-        [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.viewLayout];
+        [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:self.viewLayout];
         _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;

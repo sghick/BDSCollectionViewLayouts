@@ -25,6 +25,10 @@
 
 - (void)prepareLayout {
     [super prepareLayout];
+    self.cache = nil;
+    self.cachedIndexset = nil;
+    self.p_maxWidth = 0;
+    self.p_lineMaxHeight = 0;
     self.attrs = [self attributesInSection:0];
     UICollectionViewLayoutAttributes *last = self.attrs.lastObject;
     self.contentWidth = self.p_maxWidth + self.edgeInsets.right;
