@@ -13,7 +13,7 @@
 @property (assign, nonatomic) CGFloat contentWidth;
 @property (assign, nonatomic) CGFloat contentHeight;
 @property (strong, nonatomic) NSMutableIndexSet *cachedIndexset;
-@property (strong, nonatomic) NSArray<UICollectionViewLayoutAttributes *> *attrs;
+@property (strong, nonatomic) NSArray *attrs;
 
 @property (assign, nonatomic) CGFloat p_maxWidth;       // 最大宽,临时变量
 @property (assign, nonatomic) CGFloat p_lineMaxHeight;  // 当前行最大高,临时变量

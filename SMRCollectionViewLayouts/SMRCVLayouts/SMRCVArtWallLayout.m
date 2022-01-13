@@ -11,7 +11,7 @@
 @interface SMRCVArtWallLayout ()
 
 @property (assign, nonatomic) CGFloat contentWidth;
-@property (strong, nonatomic) NSArray<UICollectionViewLayoutAttributes *> *attrs;
+@property (strong, nonatomic) NSArray *attrs;
 
 @property (assign, nonatomic) CGFloat p_maxWidth;
 

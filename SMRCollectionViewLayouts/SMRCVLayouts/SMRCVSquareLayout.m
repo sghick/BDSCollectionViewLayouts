@@ -10,6 +10,8 @@
 
 @interface SMRCVSquareLayout ()
 
+@property (assign, nonatomic) CGFloat contentWidth;
+@property (assign, nonatomic) CGFloat contentHeight;
 @property (strong, nonatomic) NSArray *attrs;
 
 @end
@@ -18,7 +20,7 @@
 
 - (void)prepareLayout {
     [super prepareLayout];
-    _attrs = [self attributesInSection:0];
+    self.attrs = [self attributesInSection:0];
 }
 
 - (NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
@@ -26,15 +28,7 @@
 }
 
 - (CGSize)collectionViewContentSize {
-    int count = (int)[self.collectionView numberOfItemsInSection:0];
-    int rows = (count + 3 - 1)/3;
-    CGFloat rowH1 = self.collectionView.frame.size.width/2;
-    CGFloat rowH2 = rowH1/2;
-    NSInteger lineType = (count - 1)%6;
-    if (lineType == 3) {
-        return CGSizeMake(0, rows*rowH1 - rowH2);
-    }
-    return CGSizeMake(0, rows*rowH1);
+    return CGSizeMake(self.contentWidth, self.contentHeight);
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {

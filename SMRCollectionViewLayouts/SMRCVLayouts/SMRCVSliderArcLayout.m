@@ -11,7 +11,7 @@
 @interface SMRCVSliderArcLayout ()
 
 @property (assign, nonatomic) CGFloat contentWidth;
-@property (strong, nonatomic) NSArray<UICollectionViewLayoutAttributes *> *attrs;
+@property (strong, nonatomic) NSArray *attrs;
 
 @end
 
