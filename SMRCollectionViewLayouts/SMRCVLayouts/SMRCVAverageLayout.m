@@ -70,7 +70,7 @@
             frame.origin.y = self.edgeInsets.top;
             frame.origin.x = self.edgeInsets.left;
         } else {
-            frame.origin.x = CGRectGetMaxX(last.frame) + self.lineSpacing;
+            frame.origin.x = CGRectGetMaxX(last.frame) + self.interitemSpacing;
             frame.origin.y = last.frame.origin.y;
         }
         
@@ -95,7 +95,7 @@
             frame.origin.x = self.edgeInsets.left;
             self.p_lineMaxHeight = 0;
         } else {
-            frame.origin.x = CGRectGetMaxX(last.frame) + self.lineSpacing;
+            frame.origin.x = CGRectGetMaxX(last.frame) + self.interitemSpacing;
             frame.origin.y = last.frame.origin.y;
             self.p_lineMaxHeight = MAX(self.p_lineMaxHeight, frame.size.height);
         }
@@ -103,9 +103,9 @@
         // 判断是否需要折行(延迟折行)
         CGFloat preMaxX = CGRectGetMaxX(last.frame) + self.edgeInsets.right;
         if (((maxWidth > 0) && (preMaxX > maxWidth)) ||
-            ((lineMaxCount > 0) && (index%lineMaxCount == 0))) {
+            (last && (lineMaxCount > 0) && (index%lineMaxCount == 0))) {
             frame.origin.x = self.edgeInsets.left;
-            frame.origin.y += self.p_lineMaxHeight + self.interitemSpacing;
+            frame.origin.y += self.p_lineMaxHeight + self.lineSpacing;
             self.p_lineMaxHeight = frame.size.height;
         }
         
