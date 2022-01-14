@@ -9,14 +9,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class SMRCVSquareLayout;
+typedef void(^SMRCVLayoutBlock)(SMRCVSquareLayout *layout, UICollectionViewLayoutAttributes *attrs, NSIndexPath *indexPath);
+
 @interface SMRCVSquareLayout : UICollectionViewLayout
 
+/** layout时,改变attris属性即可进行布局 */
+@property (copy  , nonatomic) SMRCVLayoutBlock layoutBlock;
+
 @property (assign, nonatomic) UICollectionViewScrollDirection scrollDirection;
-/** 整块size,可包含任意个小的模块 */
+
+@property (assign, nonatomic) UIEdgeInsets edgeInsets;
+@property (assign, nonatomic) CGFloat spacing;
 @property (assign, nonatomic) CGSize moduleSize;
 @property (assign, nonatomic) CGFloat moduleLineSpacing;
 @property (assign, nonatomic) CGFloat moduleInteritemSpacing;
-@property (assign, nonatomic) UIEdgeInsets moduleInsets;
+
++ (SMRCVLayoutBlock)defaultSquareLayoutBlock;
 
 @end
 

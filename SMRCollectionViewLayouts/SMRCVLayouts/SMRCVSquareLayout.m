@@ -24,8 +24,8 @@
 - (void)prepareLayout {
     [super prepareLayout];
     self.attrs = [self attributesInSection:0];
-    self.contentWidth = self.p_maxWidth + self.moduleInsets.right;
-    self.contentHeight = self.p_maxHeight + self.moduleInsets.bottom;
+    self.contentWidth = self.p_maxWidth + self.edgeInsets.right;
+    self.contentHeight = self.p_maxHeight + self.edgeInsets.bottom;
 }
 
 - (NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
@@ -39,38 +39,54 @@
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attrs =
     [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-    
-    CGSize moduleSize = self.moduleSize;
-    CGFloat moduleLineSpacing = self.moduleLineSpacing;
-    CGFloat moduleInteritemSpacing = self.moduleInteritemSpacing;
-    UIEdgeInsets moduleInsets = self.moduleInsets;
-    CGFloat width = moduleSize.width - moduleInsets.left - moduleInsets.right;
-    CGFloat height = moduleSize.height - moduleInsets.top - moduleInsets.bottom;
-    CGFloat width_2 = (width - moduleInteritemSpacing)/2;
-    CGFloat height_2 = (height - moduleLineSpacing)/2;
-    NSInteger i = indexPath.item%6;
-    NSInteger rows = indexPath.item/3;
-    CGFloat y = rows*moduleSize.height;
-    CGFloat left1 = moduleInsets.left;
-    CGFloat left2 = left1 + width_2 + moduleInteritemSpacing;
-    CGFloat top1 = y + moduleInsets.top;
-    CGFloat top2 = top1 + height_2 + moduleLineSpacing;
-    if (i==0) {
-        attrs.frame = CGRectMake(left1, top1, width_2, height);
-    } else if (i==1) {
-        attrs.frame = CGRectMake(left2, top1, width_2, height_2);
-    } else if (i==2) {
-        attrs.frame = CGRectMake(left2, top2, width_2, height_2);
-    } else if (i==3) {
-        attrs.frame = CGRectMake(left1, top1, width_2, height_2);
-    } else if (i==4) {
-        attrs.frame = CGRectMake(left1, top2, width_2, height_2);
-    } else if (i==5) {
-        attrs.frame = CGRectMake(left2, top1, width_2, height);
+    if (self.layoutBlock) {
+        self.layoutBlock(self, attrs, indexPath);
+    } else {
+        SMRCVSquareLayout.defaultSquareLayoutBlock(self, attrs, indexPath);
     }
     self.p_maxWidth = MAX(self.p_maxWidth, CGRectGetMaxX(attrs.frame));
     self.p_maxHeight = MAX(self.p_maxHeight, CGRectGetMaxY(attrs.frame));
     return attrs;
+}
+
++ (SMRCVLayoutBlock)defaultSquareLayoutBlock {
+  return ^(SMRCVSquareLayout *layout, UICollectionViewLayoutAttributes *attrs, NSIndexPath *indexPath){
+        UIEdgeInsets edgeInsets = layout.edgeInsets;
+        CGFloat spacing = layout.spacing;
+        CGSize moduleSize = layout.moduleSize;
+        CGFloat moduleLineSpacing = layout.moduleLineSpacing;
+        CGFloat moduleInteritemSpacing = layout.moduleInteritemSpacing;
+        CGFloat width = moduleSize.width;
+        CGFloat height = moduleSize.height;
+        CGFloat width_2 = (width - moduleInteritemSpacing)/2;
+        CGFloat height_2 = (height - moduleLineSpacing)/2;
+      
+        NSInteger i = indexPath.item%6;
+        NSInteger rows = indexPath.item/3;
+        CGFloat y = edgeInsets.top;
+        CGFloat x = edgeInsets.left;
+        if (layout.scrollDirection == UICollectionViewScrollDirectionVertical) {
+            y += rows*moduleSize.height + rows*spacing;
+        } else {
+            x += rows*moduleSize.width + rows*spacing;
+        }
+        CGFloat x2 = x + width_2 + moduleInteritemSpacing;
+        CGFloat y2 = y + height_2 + moduleLineSpacing;
+        
+        if (i==0) {
+            attrs.frame = CGRectMake(x, y, width_2, height);
+        } else if (i==1) {
+            attrs.frame = CGRectMake(x2, y, width_2, height_2);
+        } else if (i==2) {
+            attrs.frame = CGRectMake(x2, y2, width_2, height_2);
+        } else if (i==3) {
+            attrs.frame = CGRectMake(x, y, width_2, height_2);
+        } else if (i==4) {
+            attrs.frame = CGRectMake(x, y2, width_2, height_2);
+        } else if (i==5) {
+            attrs.frame = CGRectMake(x2, y, width_2, height);
+        }
+    };
 }
 
 @end
