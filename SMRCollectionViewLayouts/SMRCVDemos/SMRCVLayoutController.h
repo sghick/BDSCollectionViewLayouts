@@ -22,6 +22,8 @@ UICollectionViewDelegate
 >
 
 @property (strong, nonatomic, readonly) UICollectionView *collectionView;
+@property (strong, nonatomic, readonly) NSArray *dataSource;
+
 @property (assign, nonatomic) CGFloat collectionViewHeight;
 
 @end

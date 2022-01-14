@@ -11,19 +11,18 @@
 @interface SMRCVLayoutController ()
 
 @property (strong, nonatomic) UICollectionViewLayout *viewLayout;
-@property (strong, nonatomic) NSArray *dataSource;
 
 @end
 
 @implementation SMRCVLayoutController
 
 @synthesize collectionView = _collectionView;
+@synthesize dataSource = _dataSource;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:self.collectionView];
-    self.dataSource = [@"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z" componentsSeparatedByString:@" "];
     [self.collectionView reloadData];
 }
 
@@ -81,6 +80,13 @@
 }
 
 #pragma mark - Getters
+
+- (NSArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [@"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z" componentsSeparatedByString:@" "];
+    }
+    return _dataSource;
+}
 
 - (UICollectionViewLayout *)viewLayout {
     if (!_viewLayout) {
