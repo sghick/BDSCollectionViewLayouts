@@ -18,6 +18,18 @@
     [super viewDidLoad];
     self.collectionViewHeight = 250;
     self.collectionView.pagingEnabled = YES;
+    [self.collectionView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView.collectionViewLayout resetPageIndexForLoopable:self.dataSource.count];
+    });
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [collectionView.collectionViewLayout itemsCountForLoopable:self.dataSource.count];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self.collectionView.collectionViewLayout resetPageIndexForLoopableIfNeeded:self.dataSource.count];
 }
 
 - (UICollectionViewLayout *)collectionViewLayout {

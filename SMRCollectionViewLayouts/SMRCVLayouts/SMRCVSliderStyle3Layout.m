@@ -6,7 +6,6 @@
 //
 
 #import "SMRCVSliderStyle3Layout.h"
-#import "UICollectionViewLayout+SMR.h"
 
 @interface SMRCVSliderStyle3Layout ()
 
@@ -97,10 +96,20 @@
     return scale;
 }
 
+/** @override */
+- (void)resetPageIndexForLoopable:(NSInteger)itemsCount pageIndex:(NSInteger)pageIndex {
+    NSInteger revisedPageIndex = [self revisedPageIndex:pageIndex itemsCount:itemsCount];
+    [super resetPageIndexForLoopable:itemsCount pageIndex:revisedPageIndex];
+}
+
 #pragma mark - Getters
 
 - (NSInteger)half {
     return floor(self.visibleItemsCount/2.0);
+}
+
+- (NSInteger)revisedPageIndex:(NSInteger)pageIndex itemsCount:(NSInteger)itemsCount {
+    return (itemsCount + pageIndex - self.half)%itemsCount;
 }
 
 //- (NSInteger)currentPage {

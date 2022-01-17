@@ -60,3 +60,41 @@
 }
 
 @end
+
+/** 循环实现时,数据源的倍数 */
+static NSInteger _multiple = 500;
+static NSInteger _less_multiple = 299;
+static NSInteger _center_multiple = 300;
+static NSInteger _more_multiple = 301;
+
+@implementation UICollectionViewLayout (SMRLoopable)
+
+- (NSInteger)itemsCountForLoopable:(NSInteger)itemsCount {
+    return itemsCount*_multiple;
+}
+
+- (void)resetPageIndexForLoopable:(NSInteger)itemsCount {
+    [self resetPageIndexForLoopable:itemsCount pageIndex:self.currentPage];
+}
+- (void)resetPageIndexForLoopable:(NSInteger)itemsCount pageIndex:(NSInteger)pageIndex {
+    [self scrollToPageIndex:pageIndex itemsCount:itemsCount];
+}
+
+- (void)resetPageIndexForLoopableIfNeeded:(NSInteger)itemsCount {
+    [self resetPageIndexForLoopableIfNeeded:itemsCount pageIndex:self.currentPage];
+}
+- (void)resetPageIndexForLoopableIfNeeded:(NSInteger)itemsCount pageIndex:(NSInteger)pageIndex {
+    if (self.currentPage < itemsCount*_less_multiple ||
+        self.currentPage > itemsCount*_more_multiple) {
+        [self scrollToPageIndex:pageIndex itemsCount:itemsCount];
+    }
+}
+
+- (void)scrollToPageIndex:(NSInteger)pageIndex itemsCount:(NSInteger)itemsCount {
+    NSInteger index = pageIndex%itemsCount + itemsCount*_center_multiple;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    self.collectionView.contentOffset = CGPointMake(self.collectionViewSize.width*index, 0);
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:0 animated:NO];
+}
+
+@end

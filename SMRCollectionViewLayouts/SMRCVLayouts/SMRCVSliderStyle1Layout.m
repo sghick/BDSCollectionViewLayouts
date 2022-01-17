@@ -6,7 +6,6 @@
 //
 
 #import "SMRCVSliderStyle1Layout.h"
-#import "UICollectionViewLayout+SMR.h"
 
 @implementation SMRCVSliderStyle1Layout
 
