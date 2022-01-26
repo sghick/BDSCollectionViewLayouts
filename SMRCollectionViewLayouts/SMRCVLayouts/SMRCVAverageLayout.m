@@ -51,7 +51,7 @@
     }
     NSInteger itemsCount = self.itemsCount;
     for (int i = 0; i < itemsCount; i++) {
-        [self p_layoutAverageAttributesForItemAtIndex:i maxWidth:maxWidth lineMaxCount:lineMaxCount cache:cache];
+        [self p_layoutAverageAttributesForItemAtIndex:i maxWidth:maxWidth lineMaxCount:lineMaxCount cache:cache canWrap:(i < itemsCount - 1)];
     }
     return attris;
 }
@@ -85,7 +85,7 @@
 
 #pragma mark - Privates
 
-- (void)p_layoutAverageAttributesForItemAtIndex:(NSInteger)index maxWidth:(CGFloat)maxWidth lineMaxCount:(NSInteger)lineMaxCount cache:(nonnull NSMutableDictionary *)cache {
+- (void)p_layoutAverageAttributesForItemAtIndex:(NSInteger)index maxWidth:(CGFloat)maxWidth lineMaxCount:(NSInteger)lineMaxCount cache:(nonnull NSMutableDictionary *)cache canWrap:(BOOL)canWrap {
     UICollectionViewLayoutAttributes *attris = cache[@(index)];
     if (attris && ![self.cachedIndexset containsIndex:index]) {
         UICollectionViewLayoutAttributes *last = cache[@(index - 1)];
@@ -104,9 +104,9 @@
         }
         
         // 判断是否需要折行(延迟折行)
-        CGFloat preMaxX = CGRectGetMaxX(last.frame) + self.edgeInsets.right;
-        if (((maxWidth > 0) && (preMaxX > maxWidth)) ||
-            (last && (lineMaxCount > 0) && (index%lineMaxCount == 0))) {
+        CGFloat preMaxX = CGRectGetMaxX(last.frame) + CGRectGetWidth(frame) + self.edgeInsets.right;
+        if ((canWrap && (maxWidth > 0) && (preMaxX > maxWidth)) ||
+            (canWrap && last && (lineMaxCount > 0) && (index%lineMaxCount == 0))) {
             frame.origin.x = self.edgeInsets.left;
             frame.origin.y += self.p_lineMaxHeight + self.lineSpacing;
             self.p_lineMaxHeight = frame.size.height;

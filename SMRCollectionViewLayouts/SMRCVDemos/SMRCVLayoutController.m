@@ -52,6 +52,7 @@
         }];
     }
     label.text = self.dataSource[indexPath.row%self.dataSource.count];
+    NSLog(@"set cell:%@", indexPath);
     return cell;
 }
 
@@ -83,7 +84,7 @@
 
 - (NSArray *)dataSource {
     if (!_dataSource) {
-        _dataSource = [@"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z" componentsSeparatedByString:@" "];
+        _dataSource = [@"A B C" componentsSeparatedByString:@" "];
     }
     return _dataSource;
 }
