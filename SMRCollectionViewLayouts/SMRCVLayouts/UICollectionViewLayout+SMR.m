@@ -77,24 +77,47 @@ static NSInteger _more_multiple = 301;
     [self resetPageIndexForLoopable:itemsCount pageIndex:self.currentPage];
 }
 - (void)resetPageIndexForLoopable:(NSInteger)itemsCount pageIndex:(NSInteger)pageIndex {
-    [self scrollToPageIndex:pageIndex itemsCount:itemsCount];
+    [self p_setPageToIndex:pageIndex itemsCount:itemsCount];
 }
 
 - (void)resetPageIndexForLoopableIfNeeded:(NSInteger)itemsCount {
     [self resetPageIndexForLoopableIfNeeded:itemsCount pageIndex:self.currentPage];
 }
 - (void)resetPageIndexForLoopableIfNeeded:(NSInteger)itemsCount pageIndex:(NSInteger)pageIndex {
-    if (self.currentPage < itemsCount*_less_multiple ||
-        self.currentPage > itemsCount*_more_multiple) {
-        [self scrollToPageIndex:pageIndex itemsCount:itemsCount];
+    if (self.currentPage <= itemsCount*_less_multiple ||
+        self.currentPage >= itemsCount*_more_multiple) {
+        [self p_setPageToIndex:pageIndex itemsCount:itemsCount];
     }
 }
-
-- (void)scrollToPageIndex:(NSInteger)pageIndex itemsCount:(NSInteger)itemsCount {
-    NSInteger index = pageIndex%itemsCount + itemsCount*_center_multiple;
+- (void)p_setPageToIndex:(NSInteger)toIndex itemsCount:(NSInteger)itemsCount {
+    NSInteger index = toIndex%itemsCount + itemsCount*_center_multiple;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    self.collectionView.contentOffset = CGPointMake(self.collectionViewSize.width*index, 0);
+    CGPoint contentOffset = CGPointMake(self.collectionViewSize.width*index, 0);
+    [self.collectionView setContentOffset:contentOffset animated:NO];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:0 animated:NO];
+}
+
+- (void)scrollToLastIndexWithAnimated:(BOOL)animated itemsCount:(NSInteger)itemsCount {
+    [self scrollToIndex:(self.currentPage - 1) animated:animated itemsCount:itemsCount];
+}
+- (void)scrollToNextIndexWithAnimated:(BOOL)animated itemsCount:(NSInteger)itemsCount {
+    [self scrollToIndex:(self.currentPage + 1) animated:animated itemsCount:itemsCount];
+}
+- (void)scrollToIndex:(NSInteger)toIndex animated:(BOOL)animated itemsCount:(NSInteger)itemsCount {
+    NSInteger allCount = [self itemsCountForLoopable:itemsCount];
+    if ((toIndex <= itemsCount*_less_multiple) ||
+        (toIndex >= itemsCount*_more_multiple)) {
+        toIndex = allCount*0.5;
+        NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:toIndex inSection:0];
+        [self.collectionView scrollToItemAtIndexPath:nextIndexPath
+                                    atScrollPosition:UICollectionViewScrollPositionNone
+                                            animated:NO];
+        return;
+    }
+    NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:toIndex inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:nextIndexPath
+                                atScrollPosition:UICollectionViewScrollPositionNone
+                                        animated:animated];
 }
 
 @end

@@ -53,6 +53,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)resetPageIndexForLoopableIfNeeded:(NSInteger)itemsCount;
 - (void)resetPageIndexForLoopableIfNeeded:(NSInteger)itemsCount pageIndex:(NSInteger)pageIndex;
 
+/**
+ 滑动到指定页
+ */
+- (void)scrollToLastIndexWithAnimated:(BOOL)animated itemsCount:(NSInteger)itemsCount;
+- (void)scrollToNextIndexWithAnimated:(BOOL)animated itemsCount:(NSInteger)itemsCount;
+- (void)scrollToIndex:(NSInteger)toIndex animated:(BOOL)animated itemsCount:(NSInteger)itemsCount;
+
 @end
 
 NS_ASSUME_NONNULL_END
