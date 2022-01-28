@@ -119,6 +119,18 @@
     }
 }
 
+#pragma mark - Setters
+
+- (void)setLineMaxCount:(NSInteger)lineMaxCount {
+    _lineMaxCount = lineMaxCount;
+    _numberOfLines = 0;
+}
+
+- (void)setNumberOfLines:(NSInteger)numberOfLines {
+    _numberOfLines = numberOfLines;
+    _lineMaxCount = 0;
+}
+
 #pragma mark - Getters
 
 - (NSMutableIndexSet *)cachedIndexset {
