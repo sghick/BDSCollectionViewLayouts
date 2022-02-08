@@ -13,7 +13,7 @@
 @property (assign, nonatomic) CGFloat contentWidth;
 @property (strong, nonatomic) NSArray *attrs;
 
-@property (assign, nonatomic) CGFloat p_maxWidth;
+@property (strong, nonatomic) NSMutableArray *queue;
 
 @end
 
@@ -21,7 +21,6 @@
 
 - (void)prepareLayout {
     [super prepareLayout];
-    self.p_maxWidth = 0;
     self.attrs = [self attributesInSection:0];
     UICollectionViewLayoutAttributes *last = self.attrs.lastObject;
     self.contentWidth = CGRectGetMaxX(last.frame) + self.edgeInsets.right;
@@ -48,7 +47,6 @@
         }
         
         if (!last) {
-            self.p_maxWidth = 0;
             frame.origin.x = self.edgeInsets.left;
         } else {
             frame.origin.x = CGRectGetMaxX(last.frame);
@@ -63,9 +61,7 @@
         
         attrs.frame = frame;
         attrs.center = CGPointMake(attrs.center.x + offset.x, centerY + offset.y);
-        
-        self.p_maxWidth = MAX(self.p_maxWidth, CGRectGetMaxX(attrs.frame));
-        
+                
         cache[@(indexPath.item)] = attrs;
     }
     return attrs;
@@ -89,6 +85,15 @@
         return 0;
     }
     return seed%(2*within) - within;
+}
+
+#pragma mark - Getters
+
+- (NSMutableArray *)cache {
+    if (!_queue) {
+        _queue = [NSMutableArray array];
+    }
+    return _queue;
 }
 
 @end
