@@ -41,10 +41,8 @@
     NSUInteger left = last.indexPath.item;
     NSUInteger right = next.indexPath.item;
     NSRange range = NSMakeRange(left, right - left);
-    NSLog(@"load range:%@,%@", NSStringFromRange(range), NSStringFromCGRect(rect));
     self.attrs = [self attributesInSection:0 range:range cache:self.cache];
     UICollectionViewLayoutAttributes *nlast = self.attrs.lastObject;
-    NSLog(@":%@", NSStringFromCGRect(nlast.frame));
     self.contentWidth = MAX(CGRectGetMaxX(nlast.frame), self.contentWidth) + self.collectionViewSize.width;
     return self.attrs;
 }
