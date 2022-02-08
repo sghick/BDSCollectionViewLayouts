@@ -46,7 +46,7 @@ UITableViewDelegate>
         [DemoItem itemWithName:@"环形" cls:@"SMRCVCircleLayoutController"],
         [DemoItem itemWithName:@"矩形" cls:@"SMRCVSquareLayoutController"],
         [DemoItem itemWithName:@"瀑布流" cls:@"SMRCVWaterfallLayoutController"],
-        [DemoItem itemWithName:@"艺术墙" cls:@"SMRCVArtWallLayoutController"],
+        [DemoItem itemWithName:@"照片墙" cls:@"SMRCVArtWallLayoutController"],
         [DemoItem itemWithName:@"滑动1" cls:@"SMRCVSliderStyle1LayoutController"],
         [DemoItem itemWithName:@"滑动2" cls:@"SMRCVSliderStyle2LayoutController"],
         [DemoItem itemWithName:@"滑动3" cls:@"SMRCVSliderStyle3LayoutController"],

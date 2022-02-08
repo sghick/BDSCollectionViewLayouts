@@ -12,8 +12,7 @@
 
 @property (assign, nonatomic) CGFloat contentWidth;
 @property (strong, nonatomic) NSArray *attrs;
-
-@property (strong, nonatomic) NSMutableArray *queue;
+@property (strong, nonatomic) NSMutableDictionary *cache;
 
 @end
 
@@ -21,17 +20,87 @@
 
 - (void)prepareLayout {
     [super prepareLayout];
-    self.attrs = [self attributesInSection:0];
-    UICollectionViewLayoutAttributes *last = self.attrs.lastObject;
-    self.contentWidth = CGRectGetMaxX(last.frame) + self.edgeInsets.right;
+    CGRect initRect = CGRectMake(0, 0,
+                                 CGRectGetWidth(self.collectionView.frame),
+                                 CGRectGetHeight(self.collectionView.frame));
+    self.attrs = [self layoutAttributesForElementsInRect:initRect];
+    self.contentWidth = 0;
 }
 
 - (CGSize)collectionViewContentSize {
-    return CGSizeMake(self.contentWidth, 0);
+    return CGSizeMake(CGFLOAT_MAX, 0);
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
+    UICollectionViewLayoutAttributes *head = self.attrs.firstObject ?: [self p_layoutZeroAttributes];
+    UICollectionViewLayoutAttributes *foot = self.attrs.lastObject ?: [self p_layoutZeroAttributes];
+    UICollectionViewLayoutAttributes *last =
+    [self p_layoutLastAttributesForItem:head inRect:rect cache:self.cache];
+    UICollectionViewLayoutAttributes *next =
+    [self p_layoutNextAttributesForItem:foot inRect:rect cache:self.cache];
+    NSUInteger left = last.indexPath.item;
+    NSUInteger right = next.indexPath.item;
+    NSRange range = NSMakeRange(left, right - left);
+    NSLog(@"load range:%@,%@", NSStringFromRange(range), NSStringFromCGRect(rect));
+    self.attrs = [self attributesInSection:0 range:range cache:self.cache];
+    UICollectionViewLayoutAttributes *nlast = self.attrs.lastObject;
+    NSLog(@":%@", NSStringFromCGRect(nlast.frame));
+    self.contentWidth = MAX(CGRectGetMaxX(nlast.frame), self.contentWidth) + self.collectionViewSize.width;
     return self.attrs;
+}
+
+/** 返回第0个 */
+- (UICollectionViewLayoutAttributes *)p_layoutZeroAttributes {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    UICollectionViewLayoutAttributes *item =
+    [self layoutAttributesForItemAtIndexPath:indexPath cache:self.cache];
+    return item;
+}
+
+/** 递归寻找当前rect中左边最适合的item,超出范围时多加载1个即可 */
+- (UICollectionViewLayoutAttributes *)p_layoutLastAttributesForItem:(UICollectionViewLayoutAttributes *)item inRect:(CGRect)rect cache:(nonnull NSMutableDictionary *)cache {
+    // 如果item为空,则返回第0个
+    if (!item) {
+        return [self p_layoutZeroAttributes];
+    }
+    // 如果已经是最左边一个,则直接返回自己
+    if (item.indexPath.item == 0) {
+        return item;
+    }
+    // 取出左边一个
+    NSIndexPath *lastIndexPath =
+    [NSIndexPath indexPathForItem:item.indexPath.item - 1 inSection:item.indexPath.section];
+    UICollectionViewLayoutAttributes *last =
+    [self layoutAttributesForItemAtIndexPath:lastIndexPath cache:cache];
+    CGFloat maxX = CGRectGetMaxX(last.frame);
+    // 左边一个在屏幕中显示,则再取左边一个
+    if (maxX >= CGRectGetMinX(rect)) {
+        return [self p_layoutLastAttributesForItem:last inRect:rect cache:cache];
+    }
+    return last;
+}
+
+/** 递归寻找当前rect中右边最适合的item,超出范围时多加载1个即可 */
+- (UICollectionViewLayoutAttributes *)p_layoutNextAttributesForItem:(UICollectionViewLayoutAttributes *)item inRect:(CGRect)rect cache:(nonnull NSMutableDictionary *)cache {
+    // 如果item为空,则返回第0个
+    if (!item) {
+        return [self p_layoutZeroAttributes];
+    }
+    // 如果已经是最右边一个,则直接返回自己
+    if (item.indexPath.item == (self.itemsCount - 1)) {
+        return item;
+    }
+    // 取出右边一个
+    NSIndexPath *nextIndexPath =
+    [NSIndexPath indexPathForItem:item.indexPath.item + 1 inSection:item.indexPath.section];
+    UICollectionViewLayoutAttributes *next =
+    [self layoutAttributesForItemAtIndexPath:nextIndexPath cache:cache];
+    CGFloat minX = CGRectGetMinX(next.frame);
+    // 右边一个在屏幕中显示,则再取右边一个
+    if (minX <= CGRectGetMaxX(rect)) {
+        return [self p_layoutNextAttributesForItem:next inRect:rect cache:cache];
+    }
+    return next;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath cache:(nonnull NSMutableDictionary *)cache {
@@ -89,11 +158,11 @@
 
 #pragma mark - Getters
 
-- (NSMutableArray *)cache {
-    if (!_queue) {
-        _queue = [NSMutableArray array];
+- (NSMutableDictionary *)cache {
+    if (!_cache) {
+        _cache = [NSMutableDictionary dictionary];
     }
-    return _queue;
+    return _cache;
 }
 
 @end
