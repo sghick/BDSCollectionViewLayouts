@@ -57,7 +57,7 @@ SMRCVArtWallLayoutDelegate>
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return NSIntegerMax;
+    return SMRNumberOfMax;
 }
 
 #pragma mark - Privates

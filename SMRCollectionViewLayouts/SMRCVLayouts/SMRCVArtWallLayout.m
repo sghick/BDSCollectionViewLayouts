@@ -6,7 +6,6 @@
 //
 
 #import "SMRCVArtWallLayout.h"
-#import "UICollectionViewLayout+SMR.h"
 
 @interface SMRCVArtWallLayout ()
 

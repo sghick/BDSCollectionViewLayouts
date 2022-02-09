@@ -9,6 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ 定义CollectionView无限个数的值
+ fix:使用NSIntegerMax在某些设备上会有问题
+ */
+#define SMRNumberOfMax = 100000000;
+
 @interface UICollectionViewLayout (SMR)
 
 @property (assign, nonatomic, readonly) NSInteger itemsCount; ///< 获取section:0时的itemCount
