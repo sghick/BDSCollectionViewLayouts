@@ -41,13 +41,17 @@
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     UICollectionViewLayoutAttributes *head = self.attrs.firstObject ?: [self p_layoutZeroAttributes];
     UICollectionViewLayoutAttributes *foot = self.attrs.lastObject ?: [self p_layoutZeroAttributes];
+    // 从当前最后一个往前找
     UICollectionViewLayoutAttributes *last =
-    [self p_layoutLastAttributesForItem:head inRect:rect cache:self.cache];
+    [self p_layoutLastAttributesFromItem:foot inRect:rect cache:self.cache];
+    // 从当前最前一个往后找
     UICollectionViewLayoutAttributes *next =
-    [self p_layoutNextAttributesForItem:foot inRect:rect cache:self.cache];
+    [self p_layoutNextAttributesFromItem:head inRect:rect cache:self.cache];
     NSUInteger left = last.looperIndex;
     NSUInteger right = next.looperIndex;
     NSRange range = NSMakeRange(left, right - left + 1);
+    NSString *log0 = [NSString stringWithFormat:@"<==>load:%@ %@", NSStringFromRange(range), NSStringFromCGRect(rect)];
+    printf("%s\n", log0.UTF8String);
     self.attrs = [self attributesInSection:0 range:range cache:self.cache];
     UICollectionViewLayoutAttributes *nlast = self.attrs.lastObject;
     self.contentWidth = MAX(CGRectGetMaxX(nlast.frame), self.contentWidth) + self.collectionViewSize.width;
@@ -63,7 +67,7 @@
 }
 
 /** 递归寻找当前rect中左边最适合的item,超出范围时多加载1个即可 */
-- (UICollectionViewLayoutAttributes *)p_layoutLastAttributesForItem:(UICollectionViewLayoutAttributes *)item inRect:(CGRect)rect cache:(nonnull NSMutableDictionary *)cache {
+- (UICollectionViewLayoutAttributes *)p_layoutLastAttributesFromItem:(UICollectionViewLayoutAttributes *)item inRect:(CGRect)rect cache:(nonnull NSMutableDictionary *)cache {
     // 如果item为空,则返回第0个
     if (!item) {
         return [self p_layoutZeroAttributes];
@@ -80,13 +84,13 @@
     CGFloat maxX = CGRectGetMaxX(last.frame);
     // 左边一个在屏幕中显示,则再取左边一个
     if (maxX >= CGRectGetMinX(rect)) {
-        return [self p_layoutLastAttributesForItem:last inRect:rect cache:cache];
+        return [self p_layoutLastAttributesFromItem:last inRect:rect cache:cache];
     }
     return last;
 }
 
 /** 递归寻找当前rect中右边最适合的item,超出范围时多加载1个即可 */
-- (UICollectionViewLayoutAttributes *)p_layoutNextAttributesForItem:(UICollectionViewLayoutAttributes *)item inRect:(CGRect)rect cache:(nonnull NSMutableDictionary *)cache {
+- (UICollectionViewLayoutAttributes *)p_layoutNextAttributesFromItem:(UICollectionViewLayoutAttributes *)item inRect:(CGRect)rect cache:(nonnull NSMutableDictionary *)cache {
     // 如果item为空,则返回第0个
     if (!item) {
         return [self p_layoutZeroAttributes];
@@ -104,7 +108,7 @@
     CGFloat minX = CGRectGetMinX(next.frame);
     // 右边一个在屏幕中显示,则再取右边一个
     if (minX <= CGRectGetMaxX(rect)) {
-        return [self p_layoutNextAttributesForItem:next inRect:rect cache:cache];
+        return [self p_layoutNextAttributesFromItem:next inRect:rect cache:cache];
     }
     return next;
 }
@@ -114,7 +118,6 @@
     NSInteger looperIndex = indexPath.item;
     UICollectionViewLayoutAttributes *attrs = cache[@(looperIndex)];
     if (!attrs) {
-        NSLog(@"layout:%@", @(indexPath.item));
         UICollectionViewLayoutAttributes *last = cache[@(looperIndex - 1)];
         NSInteger mIndex = looperIndex%self.itemsCount;
         NSIndexPath *mIndexPath = [NSIndexPath indexPathForItem:mIndex inSection:0];
@@ -143,8 +146,11 @@
         attrs.center = CGPointMake(attrs.center.x + offset.x, centerY + offset.y);
                 
         cache[@(looperIndex)] = attrs;
+        NSString *log1 = [NSString stringWithFormat:@"layout:%@ %@", @(indexPath.item), NSStringFromCGRect(attrs.frame)];
+        printf("%s\n", log1.UTF8String);
     } else {
-        NSLog(@"layout cache:%@", @(indexPath.item));
+        NSString *log2 = [NSString stringWithFormat:@"cache-layout:%@ %@", @(indexPath.item), NSStringFromCGRect(attrs.frame)];
+        printf("%s\n", log2.UTF8String);
     }
     return attrs;
 }
