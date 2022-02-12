@@ -54,12 +54,6 @@ SMRCVArtWallLayoutDelegate>
     self.offsetTextField.frame = CGRectMake(0, 150, self.view.bounds.size.width, 50);
 }
 
-#pragma mark - UICollectionViewDataSource
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return SMRNumberOfMax;
-}
-
 #pragma mark - Privates
 
 - (CGSize)p_size {

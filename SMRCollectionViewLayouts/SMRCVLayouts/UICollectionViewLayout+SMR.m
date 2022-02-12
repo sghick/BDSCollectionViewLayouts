@@ -6,6 +6,7 @@
 //
 
 #import "UICollectionViewLayout+SMR.h"
+#import <objc/runtime.h>
 
 @implementation UICollectionViewLayout (SMR)
 
@@ -118,6 +119,26 @@ static NSInteger _more_multiple = 301;
     [self.collectionView scrollToItemAtIndexPath:nextIndexPath
                                 atScrollPosition:UICollectionViewScrollPositionNone
                                         animated:animated];
+}
+
+@end
+
+@implementation UICollectionViewLayoutAttributes (SMRLoopable)
+
+// looperIndex
+static const char SMRLooperIndexKey = '\0';
+- (void)setLooperIndex:(NSInteger)looperIndex {
+    if (looperIndex != self.looperIndex) {
+        objc_setAssociatedObject(self, &SMRLooperIndexKey, @(looperIndex), OBJC_ASSOCIATION_RETAIN);
+    }
+}
+
+- (NSInteger)looperIndex {
+    NSNumber *number = objc_getAssociatedObject(self, &SMRLooperIndexKey);
+    if (!number) {
+        return self.indexPath.item;
+    }
+    return number.doubleValue;
 }
 
 @end

@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak  , nonatomic) id<SMRCVArtWallLayoutDelegate> delegate;
 
+/** 是否无限循环,默认Yes */
+@property (assign, nonatomic) BOOL infiniteLoop;
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
 @property (assign, nonatomic) NSInteger visibleItemsCount;
 @property (assign, nonatomic) CGFloat minScale;

@@ -17,6 +17,14 @@
 
 @implementation SMRCVArtWallLayout
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _infiniteLoop = YES;
+    }
+    return self;
+}
+
 - (void)prepareLayout {
     [super prepareLayout];
     CGRect initRect = CGRectMake(0, 0,
@@ -37,9 +45,9 @@
     [self p_layoutLastAttributesForItem:head inRect:rect cache:self.cache];
     UICollectionViewLayoutAttributes *next =
     [self p_layoutNextAttributesForItem:foot inRect:rect cache:self.cache];
-    NSUInteger left = last.indexPath.item;
-    NSUInteger right = next.indexPath.item;
-    NSRange range = NSMakeRange(left, right - left);
+    NSUInteger left = last.looperIndex;
+    NSUInteger right = next.looperIndex;
+    NSRange range = NSMakeRange(left, right - left + 1);
     self.attrs = [self attributesInSection:0 range:range cache:self.cache];
     UICollectionViewLayoutAttributes *nlast = self.attrs.lastObject;
     self.contentWidth = MAX(CGRectGetMaxX(nlast.frame), self.contentWidth) + self.collectionViewSize.width;
@@ -61,12 +69,12 @@
         return [self p_layoutZeroAttributes];
     }
     // 如果已经是最左边一个,则直接返回自己
-    if (item.indexPath.item == 0) {
+    if (item.looperIndex == 0) {
         return item;
     }
     // 取出左边一个
     NSIndexPath *lastIndexPath =
-    [NSIndexPath indexPathForItem:item.indexPath.item - 1 inSection:item.indexPath.section];
+    [NSIndexPath indexPathForItem:item.looperIndex - 1 inSection:item.indexPath.section];
     UICollectionViewLayoutAttributes *last =
     [self layoutAttributesForItemAtIndexPath:lastIndexPath cache:cache];
     CGFloat maxX = CGRectGetMaxX(last.frame);
@@ -84,12 +92,13 @@
         return [self p_layoutZeroAttributes];
     }
     // 如果已经是最右边一个,则直接返回自己
-    if (item.indexPath.item == (self.itemsCount - 1)) {
+    if (!self.infiniteLoop &&
+        (item.looperIndex == (self.itemsCount - 1))) {
         return item;
     }
     // 取出右边一个
     NSIndexPath *nextIndexPath =
-    [NSIndexPath indexPathForItem:item.indexPath.item + 1 inSection:item.indexPath.section];
+    [NSIndexPath indexPathForItem:item.looperIndex + 1 inSection:item.indexPath.section];
     UICollectionViewLayoutAttributes *next =
     [self layoutAttributesForItemAtIndexPath:nextIndexPath cache:cache];
     CGFloat minX = CGRectGetMinX(next.frame);
@@ -100,16 +109,21 @@
     return next;
 }
 
+/** 此时的indexPath并非实际的indexPath,取cell时需要转换成实际的indexPath */
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath cache:(nonnull NSMutableDictionary *)cache {
-    UICollectionViewLayoutAttributes *attrs = cache[@(indexPath.item)];
+    NSInteger looperIndex = indexPath.item;
+    UICollectionViewLayoutAttributes *attrs = cache[@(looperIndex)];
     if (!attrs) {
-        UICollectionViewLayoutAttributes *last = cache[@(indexPath.item - 1)];
-        attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-        
+        NSLog(@"layout:%@", @(indexPath.item));
+        UICollectionViewLayoutAttributes *last = cache[@(looperIndex - 1)];
+        NSInteger mIndex = looperIndex%self.itemsCount;
+        NSIndexPath *mIndexPath = [NSIndexPath indexPathForItem:mIndex inSection:0];
+        attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:mIndexPath];
+        attrs.looperIndex = looperIndex;
         CGRect frame = attrs.frame;
         CGFloat centerY = self.contentOffset.y + self.collectionViewSize.height/2;
         if ([self.delegate respondsToSelector:@selector(layout:sizeForItemAtIndex:)]) {
-            frame.size = [self.delegate layout:self sizeForItemAtIndex:indexPath.item];
+            frame.size = [self.delegate layout:self sizeForItemAtIndex:mIndex];
         }
         
         if (!last) {
@@ -120,7 +134,7 @@
         
         CGPoint offset = CGPointZero;
         if ([self.delegate respondsToSelector:@selector(layout:offsetForItemAtIndex:)]) {
-            offset = [self.delegate layout:self offsetForItemAtIndex:indexPath.item];
+            offset = [self.delegate layout:self offsetForItemAtIndex:mIndex];
         } else {
             offset = [self offsetWithSeedAttr:last ?: attrs];
         }
@@ -128,7 +142,9 @@
         attrs.frame = frame;
         attrs.center = CGPointMake(attrs.center.x + offset.x, centerY + offset.y);
                 
-        cache[@(indexPath.item)] = attrs;
+        cache[@(looperIndex)] = attrs;
+    } else {
+        NSLog(@"layout cache:%@", @(indexPath.item));
     }
     return attrs;
 }
