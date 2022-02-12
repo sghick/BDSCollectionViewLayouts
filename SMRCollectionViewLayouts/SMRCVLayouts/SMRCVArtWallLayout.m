@@ -50,8 +50,6 @@
     NSUInteger left = last.looperIndex;
     NSUInteger right = next.looperIndex;
     NSRange range = NSMakeRange(left, MIN(right - left + 1, self.itemsCount));
-    NSString *log0 = [NSString stringWithFormat:@"<==>load:%@ %@", NSStringFromRange(range), NSStringFromCGRect(rect)];
-    printf("%s\n", log0.UTF8String);
     self.attrs = [self attributesInSection:0 range:range cache:self.cache];
     UICollectionViewLayoutAttributes *nlast = self.attrs.lastObject;
     self.contentWidth = MAX(CGRectGetMaxX(nlast.frame) + self.edgeInsets.right, self.contentWidth);
