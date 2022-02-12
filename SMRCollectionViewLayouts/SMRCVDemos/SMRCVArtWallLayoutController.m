@@ -89,6 +89,12 @@ SMRCVArtWallLayoutDelegate>
     return arc4random()%(2*c) - c + base;
 }
 
+#pragma mark - UICollectionViewDataSource
+
+//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+//    return self.dataSource.count*30;
+//}
+
 #pragma mark - SMRCVArtWallLayoutDelegate
 
 - (CGSize)layout:(SMRCVArtWallLayout *)layout sizeForItemAtIndex:(NSUInteger)index {
@@ -127,8 +133,6 @@ SMRCVArtWallLayoutDelegate>
 - (UICollectionViewLayout *)collectionViewLayout {
     SMRCVArtWallLayout *layout = [[SMRCVArtWallLayout alloc] init];
     layout.edgeInsets = UIEdgeInsetsMake(20, 20, 20, 20);
-    layout.visibleItemsCount = 5;
-    layout.minScale = 0.5;
     layout.delegate = self;
     return layout;
 }

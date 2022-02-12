@@ -35,7 +35,7 @@
 }
 
 - (CGSize)collectionViewContentSize {
-    return CGSizeMake(CGFLOAT_MAX, 0);
+    return CGSizeMake(self.infiniteLoop ? CGFLOAT_MAX : self.contentWidth, 0);
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
@@ -49,12 +49,13 @@
     [self p_layoutNextAttributesFromItem:head inRect:rect cache:self.cache];
     NSUInteger left = last.looperIndex;
     NSUInteger right = next.looperIndex;
-    NSRange range = NSMakeRange(left, right - left + 1);
+    NSRange range = NSMakeRange(left, MIN(right - left + 1, self.itemsCount));
     NSString *log0 = [NSString stringWithFormat:@"<==>load:%@ %@", NSStringFromRange(range), NSStringFromCGRect(rect)];
     printf("%s\n", log0.UTF8String);
     self.attrs = [self attributesInSection:0 range:range cache:self.cache];
     UICollectionViewLayoutAttributes *nlast = self.attrs.lastObject;
-    self.contentWidth = MAX(CGRectGetMaxX(nlast.frame), self.contentWidth) + self.collectionViewSize.width;
+    self.contentWidth = MAX(CGRectGetMaxX(nlast.frame) + self.edgeInsets.right, self.contentWidth);
+    self.contentWidth = MAX(self.collectionViewSize.width + 1, self.contentWidth);
     return self.attrs;
 }
 
@@ -122,7 +123,7 @@
         NSInteger mIndex = looperIndex%self.itemsCount;
         NSIndexPath *mIndexPath = [NSIndexPath indexPathForItem:mIndex inSection:0];
         attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:mIndexPath];
-        attrs.looperIndex = looperIndex;
+        attrs.looperIndex = self.infiniteLoop ? looperIndex : mIndex;
         CGRect frame = attrs.frame;
         CGFloat centerY = self.contentOffset.y + self.collectionViewSize.height/2;
         if ([self.delegate respondsToSelector:@selector(layout:sizeForItemAtIndex:)]) {
@@ -146,11 +147,6 @@
         attrs.center = CGPointMake(attrs.center.x + offset.x, centerY + offset.y);
                 
         cache[@(looperIndex)] = attrs;
-        NSString *log1 = [NSString stringWithFormat:@"layout:%@ %@", @(indexPath.item), NSStringFromCGRect(attrs.frame)];
-        printf("%s\n", log1.UTF8String);
-    } else {
-        NSString *log2 = [NSString stringWithFormat:@"cache-layout:%@ %@", @(indexPath.item), NSStringFromCGRect(attrs.frame)];
-        printf("%s\n", log2.UTF8String);
     }
     return attrs;
 }

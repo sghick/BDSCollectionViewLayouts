@@ -27,11 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak  , nonatomic) id<SMRCVArtWallLayoutDelegate> delegate;
 
-/** 是否无限循环,默认Yes */
+/**
+ 是否无限循环,默认Yes,此功能暂时不完善,目前只适配无限的
+ 设置为无限时,请保证数据源个数大于一次性加载的最大个数,
+ 且必须是原数据源个数的倍数,推荐为数据源的5-10倍
+ */
 @property (assign, nonatomic) BOOL infiniteLoop;
 @property (assign, nonatomic) UIEdgeInsets edgeInsets;
-@property (assign, nonatomic) NSInteger visibleItemsCount;
-@property (assign, nonatomic) CGFloat minScale;
 
 /** 返回一个艺术墙的随机偏移量 */
 - (CGPoint)offsetWithSeedAttr:(UICollectionViewLayoutAttributes *)seedAttr;
